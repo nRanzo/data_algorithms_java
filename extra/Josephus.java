@@ -6,7 +6,7 @@ public class Josephus {
      * @param <E> The type of elements in the deque.
      * @return The last remaining element (the winner).
      */
-    public static <E> E Josephus(HDeque<E> deque, int k) {
+    public static <E> E simulate(HDeque<E> deque, int k) {
         if (deque.isEmpty()) {
             return null;
         }
@@ -44,8 +44,8 @@ public class Josephus {
         String[] s1 = {"Alice", "Brian", "Clara", "Dom", "Ed", "Friener"};
         String[] s2 = {"Gian", "Hope", "Ilary", "John", "Kim", "Laura"};
         String[] s3 = {"Mike", "Roberto"};
-        System.out.println("First winner is " + Josephus(buildDeque(s1), 3));
-        System.out.println("Second winner is " + Josephus(buildDeque(s2), 10));
-        System.out.println("Third winner is " + Josephus(buildDeque(s3), 7));
+        System.out.println("First winner is " + simulate(buildDeque(s1), 3));
+        System.out.println("Second winner is " + simulate(buildDeque(s2), 10));
+        System.out.println("Third winner is " + simulate(buildDeque(s3), 7));
     }
 }
