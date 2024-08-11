@@ -2,8 +2,6 @@
 
 import java.util.NoSuchElementException;
 
-import lists.SinglyLinkedList;
-
 /**
  * LinkedStack is a stack implementation using a singly linked list.
  * This implementation has O(1) time complexity for push, pop, and top operations.

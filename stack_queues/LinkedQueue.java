@@ -8,7 +8,6 @@
  *
  * @param <E> the type of elements held in this queue
  */
-import lists.SinglyLinkedList;
 
 public class LinkedQueue<E> {
 
