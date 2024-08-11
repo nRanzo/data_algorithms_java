@@ -1,54 +1,40 @@
 public class Josephus {
-
     /**
-     * Determines the winner of the Josephus problem using a circular queue.
-     * @param queue The CircularQueue instance representing the participants.
+     * Determines the winner of the Josephus problem using a deque.
+     * @param deque The HDeque instance representing the participants.
      * @param k The step count after which a participant is removed.
-     * @param <E> The type of elements in the queue.
+     * @param <E> The type of elements in the deque.
      * @return The last remaining element (the winner).
      */
-    public static <E> E Josephus(HCircularQueue<E> queue, int k) {
-        if (queue.isEmpty()) {
+    public static <E> E Josephus(HDeque<E> deque, int k) {
+        if (deque.isEmpty()) {
             return null;
         }
-    
-        while (queue.size() > 1) {
-            int count = 0; // Initialize count of non-null items
-            while (count < k - 1) {
-                // Rotate until we skip k-1 non-null items
-                queue.rotate();
-                if (queue.first() != null) {
-                    count++;
-                }
+        while (deque.size() > 1) {
+            for (int i = 0; i < k - 1; i++) {
+                // Simulate rotation by moving the first element to the end
+                deque.addLast(deque.removeFirst());
             }
-    
-            // Remove and print the k-th non-null item
-            E e = queue.dequeue();  // Remove the element
-            System.out.println("   " + e + " is out");
-            
-            // If the queue becomes empty after removal, handle it gracefully
-            if (queue.isEmpty()) {
-                return null;
-            }
+            // Remove and print the k-th item
+            E e = deque.removeFirst();
+            System.out.println(" " + e + " is out");
         }
-    
         // Return the last remaining element
-        return queue.dequeue();
+        return deque.removeFirst();
     }
-    
 
     /**
-     * Constructs a circular queue from an array of objects.
-     * @param a The array of elements to add to the queue.
+     * Constructs a deque from an array of objects.
+     * @param a The array of elements to add to the deque.
      * @param <E> The type of elements in the array.
-     * @return A CircularQueue instance containing the elements of the array.
+     * @return A HDeque instance containing the elements of the array.
      */
-    public static <E> HCircularQueue<E> buildQueue(E[] a) {
-        HCircularQueue<E> queue = new LinkedCircularQueue<>();
+    public static <E> HDeque<E> buildDeque(E[] a) {
+        HDeque<E> deque = new LinkedDeque<>();
         for (E element : a) {
-            queue.enqueue(element);
+            deque.addLast(element);
         }
-        return queue;
+        return deque;
     }
 
     /**
@@ -58,9 +44,8 @@ public class Josephus {
         String[] s1 = {"Alice", "Brian", "Clara", "Dom", "Ed", "Friener"};
         String[] s2 = {"Gian", "Hope", "Ilary", "John", "Kim", "Laura"};
         String[] s3 = {"Mike", "Roberto"};
-
-        System.out.println("First winner is " + Josephus(buildQueue(s1), 3));
-        System.out.println("Second winner is " + Josephus(buildQueue(s2), 10));
-        System.out.println("Third winner is " + Josephus(buildQueue(s3), 7));
+        System.out.println("First winner is " + Josephus(buildDeque(s1), 3));
+        System.out.println("Second winner is " + Josephus(buildDeque(s2), 10));
+        System.out.println("Third winner is " + Josephus(buildDeque(s3), 7));
     }
 }
