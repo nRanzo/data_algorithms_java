@@ -47,10 +47,10 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
     }
 
     @SuppressWarnings("unchecked")
-    private Node<E> validate(Position<E> p) throws IllegalArgumentException {
-        if(!(p instanceof Node))
+    private Node<E> validate(Object object) throws IllegalArgumentException {
+        if(!(object instanceof Node))
             throw new IllegalArgumentException("Invalid position received");
-        Node<E> node = (Node<E>) p; // safe cast, ignore type safety warn
+        Node<E> node = (Node<E>) object; // safe cast, ignore type safety warn
         if(node.getNext() == null)
             throw new IllegalArgumentException("position no longer valid");
         return node;
@@ -119,6 +119,11 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
         Node<E> node = validate(p);
         return addBetween(e, node, node.getNext());
     }
+
+    public E get(Object object) throws IllegalArgumentException {
+        Node<E> node = validate(object);
+        return node.getElement();
+    }    
 
     public E set(Position<E> p, E e) throws IllegalArgumentException {
         Node<E> node = validate(p);

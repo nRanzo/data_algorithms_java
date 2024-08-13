@@ -265,9 +265,7 @@
                 currentIndex = index;
             }
     
-            public ArrayListIterator() {
-                //TODO Auto-generated constructor stub
-            }
+            public ArrayListIterator() {}
 
             @Override
             public boolean hasNext() {
