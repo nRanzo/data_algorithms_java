@@ -259,6 +259,7 @@
     
         private class ArrayListIterator implements HListIterator {
             private int currentIndex = 0;
+            private boolean removable = false;
     
             public ArrayListIterator() {
             }
@@ -273,10 +274,11 @@
             }
     
             @Override
-            public Object next() {
+            public Object next() throws NoSuchElementException {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
+                removable = true;
                 return data[currentIndex++];
             }
     
@@ -304,7 +306,9 @@
             }
     
             @Override
-            public void remove() {
+            public void remove() throws IllegalStateException {
+                if(!removable)
+                    throw new IllegalStateException("No item to remove");
                 ArrayList.this.remove(--currentIndex);
             }
     
