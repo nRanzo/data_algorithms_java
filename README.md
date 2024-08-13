@@ -82,3 +82,4 @@ This repository is licensed under the MIT License. See the [LICENSE](LICENSE) fi
 ## Problems:
 1. ListAdapter.java suffers from backing problem
 2. LinkedPositionalListGui.java is not working properly
+3. Position.java is an interface, so should start with H
