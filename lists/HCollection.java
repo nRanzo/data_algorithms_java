@@ -1,7 +1,8 @@
 /**
  * Interface that defines the basic methods of a collection.
+ * @param <E>
  */
-public interface HCollection {
+public interface HCollection<E> {
 
     /**
      * Adds an element to the collection.
@@ -17,7 +18,7 @@ public interface HCollection {
      * @param c the collection containing the elements to add
      * @return true if all elements were successfully added, otherwise false
      */
-    boolean addAll(HCollection c);
+    boolean addAll(HCollection<E> c);
 
     /**
      * Removes all elements from the collection.
@@ -38,7 +39,7 @@ public interface HCollection {
      * @param c the collection containing the elements to search for
      * @return true if the collection contains all elements, otherwise false
      */
-    boolean containsAll(HCollection c);
+    boolean containsAll(HCollection<E> c);
 
     /**
      * Compares this collection with the specified object for equality.
@@ -67,7 +68,7 @@ public interface HCollection {
      *
      * @return an iterator over the collection
      */
-    HIterator iterator();
+    HIterator<E> iterator();
 
     /**
      * Removes the specified element from the collection.
@@ -83,7 +84,7 @@ public interface HCollection {
      * @param c the collection containing the elements to remove
      * @return true if all elements were successfully removed, otherwise false
      */
-    boolean removeAll(HCollection c);
+    boolean removeAll(HCollection<E> c);
 
     /**
      * Retains only the elements in this collection that are also contained in the specified collection.
@@ -92,7 +93,7 @@ public interface HCollection {
      * @return true if the collection was modified, otherwise false
      * @throws ArrayIndexOutOfBoundsException if an exception occurs during the operation
      */
-    boolean retainAll(HCollection c) throws ArrayIndexOutOfBoundsException;
+    boolean retainAll(HCollection<E> c) throws ArrayIndexOutOfBoundsException;
 
     /**
      * Returns the number of elements in the collection.

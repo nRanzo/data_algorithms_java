@@ -81,4 +81,3 @@ This repository is licensed under the MIT License. See the [LICENSE](LICENSE) fi
 
 ## Problems:
 1. ListAdapter.java suffers from backing problem
-2. Josephus.java is not working properly, Josephus() method must me remade

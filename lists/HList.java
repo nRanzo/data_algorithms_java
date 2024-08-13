@@ -1,8 +1,9 @@
 /**
  * HList interface that defines the methods of a list.
  * Extends the HCollection interface to add list-specific operations.
+ * @param <E>
  */
-public interface HList extends HCollection {
+public interface HList<E> extends HCollection<E> {
 
     /**
      * Inserts the specified element into this list at the specified index.
@@ -20,7 +21,7 @@ public interface HList extends HCollection {
      * @param c     the collection containing the elements to be added
      * @return true if all elements were successfully added, otherwise false
      */
-    boolean addAll(int index, HCollection c);
+    boolean addAll(int index, HCollection<E> c);
 
     /**
      * Returns the element at the specified position in this list.
@@ -55,7 +56,7 @@ public interface HList extends HCollection {
      *
      * @return an iterator over this list
      */
-    HListIterator listIterator();
+    HListIterator<E> listIterator();
 
     /**
      * Returns an iterator over this list, starting at the specified position.
@@ -63,7 +64,7 @@ public interface HList extends HCollection {
      * @param index the index at which to start the iteration
      * @return an iterator over this list, starting at the specified position
      */
-    HListIterator listIterator(int index);
+    HListIterator<E> listIterator(int index);
 
     /**
      * Removes the element at the specified position in this list.
@@ -92,5 +93,5 @@ public interface HList extends HCollection {
      * @return a view of this list between the specified indices
      * @throws ArrayIndexOutOfBoundsException if the indices are out of range
      */
-    HList subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException;
+    HList<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException;
 }

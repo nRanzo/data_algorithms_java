@@ -2,7 +2,7 @@
  * HListIterator interface that defines the methods of a list iterator.
  * Extends the HIterator interface and adds operations specific to forward and backward iteration in a list.
  */
-public interface HListIterator extends HIterator {
+public interface HListIterator<E> extends HIterator<E> {
 
     /**
      * Inserts the specified element into the list immediately before the element that would

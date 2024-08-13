@@ -7,11 +7,12 @@ import static org.junit.Assert.*;
 /**
  * La classe ListAdapterTest contiene unit test per la classe ListAdapter.
  * Utilizza il framework JUnit per eseguire test automatizzati.
+ * @param <E>
  */
-public class ListAdapterTest {
+public class ListAdapterTest<E> {
 
-    private ListAdapter list;
-    private ListAdapter sublist;
+    private ListAdapter<E> list;
+    private ListAdapter<E> sublist;
 
     /**
      * Imposta l'ambiente di test. Inizializza un ListAdapter con alcuni elementi e
@@ -19,7 +20,7 @@ public class ListAdapterTest {
      */
     @Before
     public void setUp() {
-        list = new ListAdapter();
+        list = new ListAdapter<E>();
         list.add("Element1");
         list.add("Element2");
         list.add("Element3");
@@ -27,7 +28,7 @@ public class ListAdapterTest {
         list.add("Element5");
 
         // sublist contiene gli elementi "Element2", "Element3", "Element4"
-        sublist = (ListAdapter) list.subList(1, 4);
+        sublist = (ListAdapter<E>) list.subList(1, 4);
     }
 
     /**
@@ -78,7 +79,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testAddAll() {
-        ListAdapter otherList = new ListAdapter();
+        ListAdapter<E> otherList = new ListAdapter<E>();
         otherList.add("ElementA");
         otherList.add("ElementB");
         
@@ -125,7 +126,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testContainsAll() {
-        ListAdapter otherList = new ListAdapter();
+        ListAdapter<E> otherList = new ListAdapter<E>();
         otherList.add("Element1");
         otherList.add("Element2");
 
@@ -141,7 +142,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testEquals() {
-        ListAdapter otherList = new ListAdapter();
+        ListAdapter<E> otherList = new ListAdapter<E>();
         otherList.add("Element1");
         otherList.add("Element2");
         otherList.add("Element3");
@@ -157,7 +158,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testIsEmpty() {
-        ListAdapter emptyList = new ListAdapter();
+        ListAdapter<E> emptyList = new ListAdapter<E>();
         assertTrue(emptyList.isEmpty());
 
         assertFalse(list.isEmpty());
@@ -170,7 +171,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testIterator() {
-        HIterator it = list.iterator();
+        HIterator<E> it = list.iterator();
         int count = 0;
         while (it.hasNext()) {
             it.next();
@@ -239,7 +240,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testRemoveAll() {
-        ListAdapter otherList = new ListAdapter();
+        ListAdapter<E> otherList = new ListAdapter<E>();
         otherList.add("Element2");
         otherList.add("Element3");
 
@@ -260,7 +261,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testRetainAll() {
-        ListAdapter otherList = new ListAdapter();
+        ListAdapter<E> otherList = new ListAdapter<E>();
         otherList.add("Element2");
         otherList.add("Element3");
         otherList.add("Element4");
@@ -369,7 +370,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testListIterator() {
-        HListIterator it = list.listIterator();
+        HListIterator<E> it = list.listIterator();
         assertTrue(it.hasNext());
         assertEquals("Element1", it.next());
 
@@ -385,7 +386,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testListIteratorWithIndex() {
-        HListIterator it = list.listIterator(2);
+        HListIterator<E> it = list.listIterator(2);
         assertEquals("Element3", it.next());
 
         it = sublist.listIterator(1);
@@ -413,7 +414,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testSubList() {
-        HList newSublist = list.subList(1, 3);
+        HList<E> newSublist = list.subList(1, 3);
         assertEquals(2, newSublist.size());
         assertEquals("Element2", newSublist.get(0));
     }
@@ -504,7 +505,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testSublistFromSublist() {
-        ListAdapter subsublist = (ListAdapter) sublist.subList(1, 3);
+        ListAdapter<E> subsublist = (ListAdapter<E>) sublist.subList(1, 3);
 
         assertEquals(2, subsublist.size());
         assertEquals("Element3", subsublist.get(0));
@@ -517,7 +518,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testAddToSublistFromSublist() {
-        ListAdapter subsublist = (ListAdapter) sublist.subList(0, 2);
+        ListAdapter<E> subsublist = (ListAdapter<E>) sublist.subList(0, 2);
 
         subsublist.add(2, "NewElement");
 
@@ -533,7 +534,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testRemoveFromSublistFromSublist() {
-        ListAdapter subsublist = (ListAdapter) sublist.subList(0, 2);
+        ListAdapter<E> subsublist = (ListAdapter<E>) sublist.subList(0, 2);
 
         subsublist.remove("Element2");
 
@@ -549,7 +550,7 @@ public class ListAdapterTest {
      */
     @Test
     public void testModifyInSublistFromSublist() {
-        ListAdapter subsublist = (ListAdapter) sublist.subList(0, 2);
+        ListAdapter<E> subsublist = (ListAdapter<E>) sublist.subList(0, 2);
 
         subsublist.set(1, "ModifiedElement");
 

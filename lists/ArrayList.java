@@ -9,7 +9,7 @@
 
     import java.util.NoSuchElementException;
 
-    public class ArrayList implements HList {
+    public class ArrayList<E> implements HList<E> {
     
         public static final int CAPACITY = 30; // Default initial capacity
         private Object[] data;
@@ -49,7 +49,7 @@
         }
     
         @Override
-        public boolean addAll(HCollection c) {
+        public boolean addAll(HCollection<E> c) {
             Object[] elements = c.toArray();
             int newSize = size + elements.length;
             if (newSize > data.length) {
@@ -61,7 +61,7 @@
         }
     
         @Override
-        public boolean addAll(int index, HCollection c) throws ArrayIndexOutOfBoundsException {
+        public boolean addAll(int index, HCollection<E> c) throws ArrayIndexOutOfBoundsException {
             checkIndex(index, size + 1); // Check if index is within valid range
             int collectionSize = c.size(); // Get the size of the collection to be added
             if (collectionSize == 0) return false; // If collection is empty, return false
@@ -77,7 +77,7 @@
             }
     
             // Copy elements from the collection to the array using an iterator
-            HIterator iterator = c.iterator();
+            HIterator<E> iterator = c.iterator();
             int i = index;
             while (iterator.hasNext()) {
                 data[i++] = iterator.next();
@@ -93,7 +93,7 @@
         }
     
         @Override
-        public boolean containsAll(HCollection c) {
+        public boolean containsAll(HCollection<E> c) {
             for (Object o : c.toArray()) {
                 if (!contains(o)) {
                     return false;
@@ -183,7 +183,7 @@
         }
     
         @Override
-        public boolean removeAll(HCollection c) {
+        public boolean removeAll(HCollection<E> c) {
             boolean modified = false;
             for (Object o : c.toArray()) {
                 while (remove(o)) {
@@ -194,7 +194,7 @@
         }
     
         @Override
-        public boolean retainAll(HCollection c) throws ArrayIndexOutOfBoundsException {
+        public boolean retainAll(HCollection<E> c) throws ArrayIndexOutOfBoundsException {
             boolean modified = false;
             for (int i = 0; i < size; i++) {
                 if (!c.contains(data[i])) {
@@ -226,10 +226,10 @@
         }
     
         @Override
-        public HList subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException {
+        public HList<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException {
             checkIndex(fromIndex, size);
             checkIndex(toIndex, size + 1);
-            ArrayList subList = new ArrayList(toIndex - fromIndex);
+            ArrayList<E> subList = new ArrayList<E>(toIndex - fromIndex);
             for (int i = fromIndex; i < toIndex; i++) {
                 subList.add(data[i]);
             }
@@ -237,17 +237,17 @@
         }
     
         @Override
-        public HIterator iterator() {
+        public HIterator<E> iterator() {
             return new ArrayListIterator();
         }
     
         @Override
-        public HListIterator listIterator() {
+        public HListIterator<E> listIterator() {
             return new ArrayListIterator();
         }
     
         @Override
-        public HListIterator listIterator(int index) {
+        public HListIterator<E> listIterator(int index) {
             return new ArrayListIterator(index);
         }
     
@@ -257,17 +257,18 @@
             data = newData;
         }
     
-        private class ArrayListIterator implements HListIterator {
+        private class ArrayListIterator implements HListIterator<E> {
             private int currentIndex = 0;
             private boolean removable = false;
-    
-            public ArrayListIterator() {
-            }
     
             public ArrayListIterator(int index) {
                 currentIndex = index;
             }
     
+            public ArrayListIterator() {
+                //TODO Auto-generated constructor stub
+            }
+
             @Override
             public boolean hasNext() {
                 return currentIndex < size;
