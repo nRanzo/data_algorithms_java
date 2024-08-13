@@ -7,4 +7,6 @@ public interface Position<E> {
      * @throws IllegalStateException if position is no longer valid
      */
     E getElement() throws IllegalStateException;
+    Position<E> getPrev();
+    Position<E> getNext();
 }

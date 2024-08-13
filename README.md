@@ -55,7 +55,7 @@ This analysis will help you understand the efficiency and trade-offs of each alg
 
 1. **Clone the Repository**: 
     ```bash
-    git clone https://github.com/your-username/essential-algorithms-datastructures.git
+    git clone https://github.com/nranzo/data_algorithms_java.git
     ```
 2. **Navigate to Specific Folders**: Explore specific data structures or algorithms by navigating through the folder structure.
 3. **Run Examples**: Each implementation comes with a main class or test cases that you can run to see the code in action.
@@ -81,3 +81,4 @@ This repository is licensed under the MIT License. See the [LICENSE](LICENSE) fi
 
 ## Problems:
 1. ListAdapter.java suffers from backing problem
+2. LinkedPositionalListGui.java is not working properly
