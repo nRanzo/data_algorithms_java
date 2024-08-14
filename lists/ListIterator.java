@@ -2,7 +2,7 @@
  * HListIterator interface that defines the methods of a list iterator.
  * Extends the HIterator interface and adds operations specific to forward and backward iteration in a list.
  */
-public interface HListIterator<E> extends HIterator<E> {
+public interface ListIterator<E> extends Iterable<E> {
 
     /**
      * Inserts the specified element into the list immediately before the element that would
@@ -21,6 +21,13 @@ public interface HListIterator<E> extends HIterator<E> {
     boolean hasPrevious();
 
     /**
+     * Checks if there is a following element in the list.
+     *
+     * @return true if there is a following element, otherwise false
+     */
+    boolean hasNext();
+
+    /**
      * Returns the index of the element that would be returned by the next call to {@code next()}.
      *
      * @return the index of the next element
@@ -36,6 +43,14 @@ public interface HListIterator<E> extends HIterator<E> {
     Object previous() throws ArrayIndexOutOfBoundsException;
 
     /**
+     * Returns the following element in the list and moves the iterator backward.
+     *
+     * @return the following element in the list
+     * @throws ArrayIndexOutOfBoundsException if an exception occurs during the operation
+     */
+    Object next() throws ArrayIndexOutOfBoundsException;
+
+    /**
      * Returns the index of the element that would be returned by the next call to {@code previous()}.
      *
      * @return the index of the previous element
@@ -49,4 +64,5 @@ public interface HListIterator<E> extends HIterator<E> {
      * @throws ArrayIndexOutOfBoundsException if an exception occurs during the operation
      */
     void set(Object o) throws ArrayIndexOutOfBoundsException;
+
 }

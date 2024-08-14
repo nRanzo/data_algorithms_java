@@ -1,8 +1,10 @@
+import java.util.Iterator;
+
 /**
  * Interface that defines the basic methods of a collection.
  * @param <E>
  */
-public interface HCollection<E> {
+public interface Collection<E> extends Iterable<E> {
 
     /**
      * Adds an element to the collection.
@@ -18,7 +20,7 @@ public interface HCollection<E> {
      * @param c the collection containing the elements to add
      * @return true if all elements were successfully added, otherwise false
      */
-    boolean addAll(HCollection<E> c);
+    boolean addAll(Collection<E> c);
 
     /**
      * Removes all elements from the collection.
@@ -39,7 +41,7 @@ public interface HCollection<E> {
      * @param c the collection containing the elements to search for
      * @return true if the collection contains all elements, otherwise false
      */
-    boolean containsAll(HCollection<E> c);
+    boolean containsAll(Collection<E> c);
 
     /**
      * Compares this collection with the specified object for equality.
@@ -68,7 +70,7 @@ public interface HCollection<E> {
      *
      * @return an iterator over the collection
      */
-    HIterator<E> iterator();
+    Iterator<E> iterator();
 
     /**
      * Removes the specified element from the collection.
@@ -84,7 +86,7 @@ public interface HCollection<E> {
      * @param c the collection containing the elements to remove
      * @return true if all elements were successfully removed, otherwise false
      */
-    boolean removeAll(HCollection<E> c);
+    boolean removeAll(Collection<E> c);
 
     /**
      * Retains only the elements in this collection that are also contained in the specified collection.
@@ -93,7 +95,7 @@ public interface HCollection<E> {
      * @return true if the collection was modified, otherwise false
      * @throws ArrayIndexOutOfBoundsException if an exception occurs during the operation
      */
-    boolean retainAll(HCollection<E> c) throws ArrayIndexOutOfBoundsException;
+    boolean retainAll(Collection<E> c) throws ArrayIndexOutOfBoundsException;
 
     /**
      * Returns the number of elements in the collection.

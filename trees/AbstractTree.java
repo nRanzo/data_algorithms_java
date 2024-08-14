@@ -1,4 +1,4 @@
-public abstract class AbstractTree<E> implements HTree<E> {
+public abstract class AbstractTree<E> implements Tree<E> {
     public boolean isInternal(Position<E> p) throws InvalidPositionException {
         return numChildren(p) > 0;
     }

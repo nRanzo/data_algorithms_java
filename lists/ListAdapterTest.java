@@ -169,9 +169,10 @@ public class ListAdapterTest<E> {
      * Verifica che l'iteratore possa scorrere correttamente tutti gli elementi
      * della lista e della sublista.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testIterator() {
-        HIterator<E> it = list.iterator();
+        Iterator<E> it = (Iterator<E>) list.iterator();
         int count = 0;
         while (it.hasNext()) {
             it.next();
@@ -179,7 +180,7 @@ public class ListAdapterTest<E> {
         }
         assertEquals(5, count);
 
-        it = sublist.iterator();
+        it = (Iterator<E>) sublist.iterator();
         count = 0;
         while (it.hasNext()) {
             it.next();
@@ -370,11 +371,11 @@ public class ListAdapterTest<E> {
      */
     @Test
     public void testListIterator() {
-        HListIterator<E> it = list.listIterator();
+        ListIterator<E> it = (ListIterator<E>) list.listIterator();
         assertTrue(it.hasNext());
         assertEquals("Element1", it.next());
 
-        it = sublist.listIterator();
+        it = (ListIterator<E>) sublist.listIterator();
         assertTrue(it.hasNext());
         assertEquals("Element2", it.next());
     }
@@ -384,12 +385,13 @@ public class ListAdapterTest<E> {
      * Verifica che il list iterator inizi correttamente dalla posizione specificata
      * nella lista e nella sublista.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testListIteratorWithIndex() {
-        HListIterator<E> it = list.listIterator(2);
+        Iterator<E> it = (Iterator<E>) list.listIterator(2);
         assertEquals("Element3", it.next());
 
-        it = sublist.listIterator(1);
+        it = (Iterator<E>) sublist.listIterator(1);
         assertEquals("Element3", it.next());
     }
 
@@ -414,7 +416,7 @@ public class ListAdapterTest<E> {
      */
     @Test
     public void testSubList() {
-        HList<E> newSublist = list.subList(1, 3);
+        List<E> newSublist = list.subList(1, 3);
         assertEquals(2, newSublist.size());
         assertEquals("Element2", newSublist.get(0));
     }

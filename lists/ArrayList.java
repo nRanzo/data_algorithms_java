@@ -7,9 +7,10 @@
     The implementation balances between time efficiency for frequent operations and memory efficiency during 
     dynamic resizing. */
 
-    import java.util.NoSuchElementException;
+    import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-    public class ArrayList<E> implements HList<E> {
+    public class ArrayList<E> implements List<E> {
     
         public static final int CAPACITY = 30; // Default initial capacity
         private Object[] data;
@@ -49,7 +50,7 @@
         }
     
         @Override
-        public boolean addAll(HCollection<E> c) {
+        public boolean addAll(Collection<E> c) {
             Object[] elements = c.toArray();
             int newSize = size + elements.length;
             if (newSize > data.length) {
@@ -61,7 +62,7 @@
         }
     
         @Override
-        public boolean addAll(int index, HCollection<E> c) throws ArrayIndexOutOfBoundsException {
+        public boolean addAll(int index, Collection<E> c) throws ArrayIndexOutOfBoundsException {
             checkIndex(index, size + 1); // Check if index is within valid range
             int collectionSize = c.size(); // Get the size of the collection to be added
             if (collectionSize == 0) return false; // If collection is empty, return false
@@ -77,7 +78,7 @@
             }
     
             // Copy elements from the collection to the array using an iterator
-            HIterator<E> iterator = c.iterator();
+            Iterator<E> iterator = c.iterator();
             int i = index;
             while (iterator.hasNext()) {
                 data[i++] = iterator.next();
@@ -93,7 +94,7 @@
         }
     
         @Override
-        public boolean containsAll(HCollection<E> c) {
+        public boolean containsAll(Collection<E> c) {
             for (Object o : c.toArray()) {
                 if (!contains(o)) {
                     return false;
@@ -183,7 +184,7 @@
         }
     
         @Override
-        public boolean removeAll(HCollection<E> c) {
+        public boolean removeAll(Collection<E> c) {
             boolean modified = false;
             for (Object o : c.toArray()) {
                 while (remove(o)) {
@@ -194,7 +195,7 @@
         }
     
         @Override
-        public boolean retainAll(HCollection<E> c) throws ArrayIndexOutOfBoundsException {
+        public boolean retainAll(Collection<E> c) throws ArrayIndexOutOfBoundsException {
             boolean modified = false;
             for (int i = 0; i < size; i++) {
                 if (!c.contains(data[i])) {
@@ -226,7 +227,7 @@
         }
     
         @Override
-        public HList<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException {
+        public List<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException {
             checkIndex(fromIndex, size);
             checkIndex(toIndex, size + 1);
             ArrayList<E> subList = new ArrayList<E>(toIndex - fromIndex);
@@ -237,17 +238,17 @@
         }
     
         @Override
-        public HIterator<E> iterator() {
+        public Iterator<E> iterator() {
             return new ArrayListIterator();
         }
     
         @Override
-        public HListIterator<E> listIterator() {
+        public Iterable<E> listIterator() {
             return new ArrayListIterator();
         }
     
         @Override
-        public HListIterator<E> listIterator(int index) {
+        public Iterable<E> listIterator(int index) {
             return new ArrayListIterator(index);
         }
     
@@ -257,7 +258,7 @@
             data = newData;
         }
     
-        private class ArrayListIterator implements HListIterator<E> {
+        private class ArrayListIterator implements ListIterator<E>, Iterator<E> {
             private int currentIndex = 0;
             private boolean removable = false;
     
@@ -272,13 +273,14 @@
                 return currentIndex < size;
             }
     
+            @SuppressWarnings("unchecked")
             @Override
-            public Object next() throws NoSuchElementException {
+            public E next() throws NoSuchElementException {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 removable = true;
-                return data[currentIndex++];
+                return (E) data[currentIndex++];    // necessary
             }
     
             @Override
@@ -319,6 +321,11 @@
             @Override
             public void add(Object e) {
                 ArrayList.this.add(currentIndex++, e);
+            }
+
+            @Override
+            public Iterator<E> iterator() {
+                return new ArrayListIterator();
             }
         }
     

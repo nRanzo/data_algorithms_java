@@ -2,13 +2,15 @@
 // this means that if you wanna use this feel free to, but you will likely need to make a few
 // changes in order to make this work the best for you
 
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Vector;
 
 /**
  * Adapter for the HList interface that uses a Vector of Object.
  * This class provides an implementation of the HList interface by adapting a Vector object.
  */
-public class ListAdapter<E> implements HList<E> {
+public class ListAdapter<E> implements List<E> {
     /**
     * Object vector used as the concrete basis of the list.
     */
@@ -42,9 +44,9 @@ public class ListAdapter<E> implements HList<E> {
      * @return true if list was modified successfully
      */
     @Override
-    public boolean addAll(HCollection<E> c) {
+    public boolean addAll(Collection<E> c) {
         boolean modified = false;
-        HIterator<E> it = c.iterator();
+        Iterator<E> it = c.iterator();
         while (it.hasNext()) {
             if (add(it.next())) {
                 modified = true;
@@ -79,8 +81,8 @@ public class ListAdapter<E> implements HList<E> {
      * @return true if the list contains all the elements of the collection
      */
     @Override
-    public boolean containsAll(HCollection<E> c) {
-        HIterator<E> it = c.iterator();
+    public boolean containsAll(Collection<E> c) {
+        Iterator<E> it = c.iterator();
         while (it.hasNext()) {
             if (!contains(it.next())) {
                 return false;
@@ -134,7 +136,7 @@ public class ListAdapter<E> implements HList<E> {
      * @return an iterator for the list
      */
     @Override
-    public HIterator<E> iterator() {
+    public Iterator<E> iterator() {
         return new ListAdapterIterator();
     }
 
@@ -156,9 +158,9 @@ public class ListAdapter<E> implements HList<E> {
      * @return true se la lista è stata modificata
      */
     @Override
-    public boolean removeAll(HCollection<E> c) {
+    public boolean removeAll(Collection<E> c) {
         boolean modified = false;
-        HIterator<E> it = c.iterator();
+        Iterator<E> it = c.iterator();
         while (it.hasNext()) {
             if (remove(it.next())) {
                 modified = true;
@@ -175,7 +177,7 @@ public class ListAdapter<E> implements HList<E> {
      * @throws ArrayIndexOutOfBoundsException se un indice è fuori dall'intervallo valido
      */
     @Override
-    public boolean retainAll(HCollection<E> c) throws ArrayIndexOutOfBoundsException {
+    public boolean retainAll(Collection<E> c) throws ArrayIndexOutOfBoundsException {
         boolean modified = false;
         for (int i = 0; i < vector.size(); i++) {
             if (!c.contains(vector.elementAt(i))) {
@@ -251,9 +253,9 @@ public class ListAdapter<E> implements HList<E> {
      * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
      */
     @Override
-    public boolean addAll(int index, HCollection<E> c) {
+    public boolean addAll(int index, Collection<E> c) {
         boolean modified = false;
-        HIterator<E> it = c.iterator();
+        Iterator<E> it = c.iterator();
         while (it.hasNext()) {
             add(index++, it.next());
             modified = true;
@@ -301,9 +303,10 @@ public class ListAdapter<E> implements HList<E> {
      *
      * @return un iteratore di lista per la lista
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public HListIterator<E> listIterator() {
-        return new ListAdapterListIterator(0);
+    public Iterable<E> listIterator() {
+        return (Iterable<E>) new ListAdapterListIterator(0);
     }
 
     /**
@@ -312,9 +315,10 @@ public class ListAdapter<E> implements HList<E> {
      * @param index la posizione iniziale dell'iteratore di lista
      * @return un iteratore di lista per la lista
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public HListIterator<E> listIterator(int index) {
-        return new ListAdapterListIterator(index);
+    public Iterable<E> listIterator(int index) {
+        return (Iterable<E>) new ListAdapterListIterator(index);
     }
 
     /**
@@ -355,7 +359,7 @@ public class ListAdapter<E> implements HList<E> {
      * @throws ArrayIndexOutOfBoundsException se un indice è fuori dall'intervallo valido
      */
     @Override
-    public HList<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException {
+    public List<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException {
         return new SubList(this, fromIndex, toIndex);
     }
 
@@ -364,7 +368,7 @@ public class ListAdapter<E> implements HList<E> {
     /**
      * Implementazione dell'iteratore per ListAdapter.
      */
-    protected class ListAdapterIterator implements HIterator<E> {
+    protected class ListAdapterIterator implements Iterator<E> {
         int cursor;
         int lastRet = -1;
 
@@ -383,13 +387,14 @@ public class ListAdapter<E> implements HList<E> {
          * @return il prossimo elemento nella lista
          * @throws ArrayIndexOutOfBoundsException se non ci sono più elementi
          */
-        public Object next() throws ArrayIndexOutOfBoundsException {
+        @SuppressWarnings("unchecked")
+        public E next() throws ArrayIndexOutOfBoundsException {
             int i = cursor;
             if (i >= vector.size()) {
                 throw new RuntimeException("No such element");
             }
             cursor = i + 1;
-            return vector.elementAt(lastRet = i);
+            return (E) vector.elementAt(lastRet = i);   // necessary
         }
 
         /**
@@ -408,7 +413,7 @@ public class ListAdapter<E> implements HList<E> {
     /**
      * Implementazione dell'iteratore di lista per ListAdapter.
      */
-    protected class ListAdapterListIterator extends ListAdapterIterator implements HListIterator<E> {
+    protected class ListAdapterListIterator extends ListAdapterIterator implements ListIterator<E> {
         ListAdapterListIterator(int index) {
             cursor = index;
         }
@@ -423,18 +428,45 @@ public class ListAdapter<E> implements HList<E> {
         }
 
         /**
+         * Verifica se ci sono elementi successivi nella lista.
+         *
+         * @return true se ci sono elementi successivi nella lista
+         * @implNote also != size() should work since cursor +2 is never made, but < is better
+         */
+        public boolean hasNext() {
+            return cursor < size();
+        }
+
+        /**
          * Restituisce l'elemento precedente nella lista.
          *
          * @return l'elemento precedente nella lista
          * @throws ArrayIndexOutOfBoundsException se non ci sono elementi precedenti
          */
-        public Object previous() throws ArrayIndexOutOfBoundsException {
+        @SuppressWarnings("unchecked")
+        public E previous() throws ArrayIndexOutOfBoundsException {
             int i = cursor - 1;
             if (i < 0) {
                 throw new RuntimeException("No such element");
             }
             cursor = i;
-            return vector.elementAt(lastRet = i);
+            return (E) vector.elementAt(lastRet = i);   // necessary
+        }
+
+        /**
+         * Restituisce l'elemento successivo nella lista.
+         *
+         * @return l'elemento successivo nella lista
+         * @throws ArrayIndexOutOfBoundsException se non ci sono elementi precedenti
+         */
+        @SuppressWarnings("unchecked")
+        public E next() throws ArrayIndexOutOfBoundsException {
+            int i = cursor+ 1;
+            if (i > size()) {
+                throw new RuntimeException("No such element");
+            }
+            cursor = i;
+            return (E) vector.elementAt(lastRet = i);   // necessary
         }
 
         /**
@@ -546,7 +578,7 @@ public class ListAdapter<E> implements HList<E> {
          * @return true se la sublist è stata modificata
          */
         @Override
-        public boolean addAll(HCollection<E> c) {
+        public boolean addAll(Collection<E> c) {
             boolean modified = super.addAll(c);
             if (modified) {
                 parent.addAll(indexFirst, c);       
@@ -563,7 +595,7 @@ public class ListAdapter<E> implements HList<E> {
          * @return true se la sublist è stata modificata
          */
         @Override
-        public boolean addAll(int index, HCollection<E> c) {
+        public boolean addAll(int index, Collection<E> c) {
             boolean modified = super.addAll(index, c);
             if (modified) {
                 parent.addAll(indexFirst + index, c);
@@ -646,7 +678,7 @@ public class ListAdapter<E> implements HList<E> {
         * @return true se la sublist è stata modificata, altrimenti false
          */
         @Override
-        public boolean removeAll(HCollection<E> c) {
+        public boolean removeAll(Collection<E> c) {
             boolean modified = false;
             for (int i = 0; i < size(); i++) {
                 if (c.contains(vector.elementAt(i))) {
@@ -666,7 +698,7 @@ public class ListAdapter<E> implements HList<E> {
         * @return true se la sublist è stata modificata, altrimenti false
         */
         @Override
-        public boolean retainAll(HCollection<E> c) {
+        public boolean retainAll(Collection<E> c) {
             boolean modified = false;
 
             for (int i = 0; i < size(); i++) {
@@ -724,7 +756,7 @@ public class ListAdapter<E> implements HList<E> {
          * @throws ArrayIndexOutOfBoundsException se un indice è fuori dall'intervallo valido
          */
         @Override
-        public HList<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException {
+        public List<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException {
             return new SubList(parent, indexFirst + fromIndex, indexFirst + toIndex);
         }
     }

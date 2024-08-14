@@ -1,7 +1,7 @@
 /**
  * HIterator interface that defines the basic methods of an iterator.
  */
-public interface HIterator<E> {
+public interface Iterator<E> {
 
     /**
      * Checks if there are more elements available in the iterator.

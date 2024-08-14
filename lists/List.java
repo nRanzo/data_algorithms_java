@@ -3,7 +3,7 @@
  * Extends the HCollection interface to add list-specific operations.
  * @param <E>
  */
-public interface HList<E> extends HCollection<E> {
+public interface List<E> extends Collection<E> {
 
     /**
      * Inserts the specified element into this list at the specified index.
@@ -21,7 +21,7 @@ public interface HList<E> extends HCollection<E> {
      * @param c     the collection containing the elements to be added
      * @return true if all elements were successfully added, otherwise false
      */
-    boolean addAll(int index, HCollection<E> c);
+    boolean addAll(int index, Collection<E> c);
 
     /**
      * Returns the element at the specified position in this list.
@@ -56,7 +56,7 @@ public interface HList<E> extends HCollection<E> {
      *
      * @return an iterator over this list
      */
-    HListIterator<E> listIterator();
+    Iterable<E> listIterator();
 
     /**
      * Returns an iterator over this list, starting at the specified position.
@@ -64,7 +64,7 @@ public interface HList<E> extends HCollection<E> {
      * @param index the index at which to start the iteration
      * @return an iterator over this list, starting at the specified position
      */
-    HListIterator<E> listIterator(int index);
+    Iterable<E> listIterator(int index);
 
     /**
      * Removes the element at the specified position in this list.
@@ -93,5 +93,5 @@ public interface HList<E> extends HCollection<E> {
      * @return a view of this list between the specified indices
      * @throws ArrayIndexOutOfBoundsException if the indices are out of range
      */
-    HList<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException;
+    List<E> subList(int fromIndex, int toIndex) throws ArrayIndexOutOfBoundsException;
 }

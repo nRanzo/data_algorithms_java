@@ -28,8 +28,6 @@ This section includes classic and advanced data structures that are fundamental 
 - **Hash Tables**: Chaining, Open Addressing
 - **Others**: Sets, Maps, Bloom Filters, Priority Queues
 
-Please note that every interface will start with "H", whereas implementations will not.
-
 ## Algorithms
 
 The algorithms section covers a wide range of essential algorithms:
@@ -79,7 +77,11 @@ Whereas if you simply need an implementation and corresponding documentation, pl
 
 This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Problems:
-1. ListAdapter.java suffers from backing problem
-2. LinkedPositionalListGui.java is not working properly
-3. Position.java is an interface, so should start with H
+## Problems to fix:
+1. extra/LinkedPositionalListGui.java is not working properly
+
+## Problems fixed:
+1. extra/Josephus.java was not working properly
+2. lists/ListAdapter.java was suffering from backing problem
+3. some interfaces started with H, whereas others did not
+4. lists/*.java had minor issues, now are well linked together
