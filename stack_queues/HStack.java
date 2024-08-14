@@ -1,7 +1,7 @@
 /*  Collection of objects that are inserted and deleted according to the last-in first-out principle. 
     Although it serves a similar purpose, this interface is different from java.util.Stack */
 
-interface HStack<E> {
+interface Stack<E> {
 
     int size();
     boolean isEmpty();

@@ -6,7 +6,7 @@ public class Josephus {
      * @param <E> The type of elements in the deque.
      * @return The last remaining element (the winner).
      */
-    public static <E> E simulate(HDeque<E> deque, int k) {
+    public static <E> E simulate(Deque<E> deque, int k) {
         if (deque.isEmpty()) {
             return null;
         }
@@ -29,8 +29,8 @@ public class Josephus {
      * @param <E> The type of elements in the array.
      * @return A HDeque instance containing the elements of the array.
      */
-    public static <E> HDeque<E> buildDeque(E[] a) {
-        HDeque<E> deque = new LinkedDeque<>();
+    public static <E> Deque<E> buildDeque(E[] a) {
+        Deque<E> deque = new LinkedDeque<>();
         for (E element : a) {
             deque.addLast(element);
         }

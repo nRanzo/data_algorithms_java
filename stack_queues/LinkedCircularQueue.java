@@ -4,16 +4,16 @@
  *
  * @param <E> the type of elements held in this queue
  */
-public class LinkedCircularQueue<E> implements HCircularQueue<E> {
+public class LinkedCircularQueue<E> implements CircularQueue<E> {
 
     private CircularQueue<E> circularQueue;
 
     public LinkedCircularQueue() {
-        circularQueue = new CircularQueue<>();
+        circularQueue = new CircularQueueImpl<>();
     }
 
     public LinkedCircularQueue(int capacity) {
-        circularQueue = new CircularQueue<>(capacity);
+        circularQueue = new CircularQueueImpl<>(capacity);
     }
 
     @Override

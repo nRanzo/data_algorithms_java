@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  *
  * @param <E> the type of elements held in this stack
  */
-public class LinkedStack<E> implements HStack<E> {
+public class LinkedStack<E> implements Stack<E> {
 
     // Composition: Using SinglyLinkedList as the underlying data structure
     private SinglyLinkedList<E> list = new SinglyLinkedList<>();

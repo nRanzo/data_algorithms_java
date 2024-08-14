@@ -7,7 +7,7 @@ import java.util.EmptyStackException;
  *
  * @param <E> the type of elements held in this stack
  */
-public class ArrayStack<E> implements HStack<E> {
+public class ArrayStack<E> implements Stack<E> {
 
     private static final int DEFAULT_CAPACITY = 500; // arbitrary initial size
     private E[] data;

@@ -1,7 +1,7 @@
 /*  The Queue interface defines the queue ADT, characterized by the first-in first-out principle for 
     managing insertions and removals */
 
-public interface HQueue<E> {
+public interface Queue<E> {
     
     int size();
     boolean isEmpty();

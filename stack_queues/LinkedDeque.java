@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  *
  * @param <E> the type of elements held in this deque
  */
-public class LinkedDeque<E> implements HDeque<E> {
+public class LinkedDeque<E> implements Deque<E> {
     private Node<E> head;
     private Node<E> tail;
     private int size;

@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  *
  * @param <E> the type of elements held in this queue
  */
-public class ArrayQueue<E> implements HQueue<E> {
+public class ArrayQueue<E> implements Queue<E> {
 
     private static final int DEFAULT_CAPACITY = 500;
     private E[] data;
