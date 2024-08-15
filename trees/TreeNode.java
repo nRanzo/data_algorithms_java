@@ -20,14 +20,12 @@ public class TreeNode<E> implements Position<E> {
         return element;
     }
 
-    @Override
     public TreeNode<E> getPrev() {
         // For a general tree, previous and next are not inherently meaningful,
         // so we return null, or this could be customized as needed.
         return null;
     }
 
-    @Override
     public TreeNode<E> getNext() {
         // Similar to getPrev, this will depend on your specific use case.
         return null;

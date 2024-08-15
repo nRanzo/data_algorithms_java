@@ -1,6 +1,6 @@
 public class AreIsomorph {
 
-    public static <E> boolean areIsomorph (BinaryTree<E> T1, BinaryTree<E> T2) throws IllegalArgumentException {
+    public static <E> boolean areIsomorph (LinkedBinaryTree<E> T1, LinkedBinaryTree<E> T2) throws IllegalArgumentException, InvalidPositionException, EmptyTreeException {
 
         if(T1 == null || T2 == null)
             throw new IllegalArgumentException();
@@ -14,7 +14,7 @@ public class AreIsomorph {
         return areIsomorph(T1, T2, T1.root(), T2.root());
     }
     
-    private static <E> boolean areIsomorph (BinaryTree<E> T1, BinaryTree<E> T2, Position<E> p1, Position<E> p2){
+    private static <E> boolean areIsomorph (LinkedBinaryTree<E> T1, LinkedBinaryTree<E> T2, Position<E> p1, Position<E> p2) throws InvalidPositionException {
     
         if(T1.isExternal(p1) && T2.isExternal(p2))
             return true;

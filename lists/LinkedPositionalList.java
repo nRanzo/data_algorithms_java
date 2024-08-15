@@ -52,7 +52,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
             throw new IllegalArgumentException("Invalid position received");
         Node<E> node = (Node<E>) object; // safe cast, ignore type safety warn
         if(node.getNext() == null)
-            throw new IllegalArgumentException("position no longer valid");
+            throw new IllegalArgumentException("Position no longer valid");
         return node;
     }
 
