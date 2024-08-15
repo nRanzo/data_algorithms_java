@@ -7,7 +7,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
         return numChildren(p) == 0;
     }
 
-    public boolean isRoot(Position<E> p) throws EmptyTreeException, InvalidPositionException {
+    public boolean isRoot(Position<E> p) throws InvalidPositionException {
         if(p == null || !(p instanceof Position<E>))
             throw new InvalidPositionException();
         return p == root();

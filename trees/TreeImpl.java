@@ -13,9 +13,9 @@ public class TreeImpl<E> extends AbstractTree<E> {
     }
 
     @Override
-    public Position<E> root() throws EmptyTreeException {
+    public Position<E> root() throws InvalidPositionException {
         if (root == null) {
-            throw new EmptyTreeException();
+            throw new InvalidPositionException();
         }
         return root;
     }
