@@ -169,10 +169,11 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return node.getRight();
     }
 
+    /**
+     * @implNote please make sure to check isEmpty() != true before calling, or throw EmptyTreeException
+     */
     @Override
-    public Position<E> root() throws EmptyTreeException {
-        if(isEmpty())
-            throw new EmptyTreeException("Tree has no nodes");
+    public Position<E> root() {
         return (Position<E>)root;
     }
 
@@ -205,28 +206,87 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             preOrderSubtree(c, snapList);
     }
 
+    public Iterable<Position<E>> postorder() throws InvalidPositionException, EmptyTreeException {
+        List<Position<E>> snapshot = new ArrayList<>();
+        if(!isEmpty())
+            postOrderSubtree(root(), snapshot);
+        return snapshot;
+    }
+    
+    private void postOrderSubtree(Position<E> p, List<Position<E>> snapList) throws InvalidPositionException {
+        for(Position<E> c : children(p))
+            postOrderSubtree(c, snapList);
+        snapList.add(p);
+    }
+
+    /**
+     * Performs a breadth-first traversal of the tree. It is such an IMPORTANT algorithm, please learn it well
+     * 
+     * @return an iterable collection of positions in the tree in breadth-first order.
+     * @throws InvalidPositionException if any position in the tree is invalid.
+     */
+    @SuppressWarnings("unchecked")
+    public Iterable<Position<E>> breadthFirst() throws InvalidPositionException {
+        List<Position<E>> snapshot = new ArrayList<>();
+        if (!isEmpty()) {
+            Queue<Position<E>> fringe = (Queue<Position<E>>) new LinkedQueue<>(); // safe cast
+            fringe.enqueue(root()); // Start with the root
+            
+            while (!fringe.isEmpty()) {
+                Position<E> p = fringe.dequeue(); // Dequeue from the front of the queue
+                snapshot.add(p); // Add the current position to the snapshot
+                
+                for (Position<E> c : children(p)) {
+                    fringe.enqueue(c); // Enqueue children at the end of the queue
+                }
+            }
+        }
+        return snapshot;
+    }
+    
+    /**
+     * Removes a node that has at most one child from the tree and returns its element.
+     * 
+     * @param p the position of the node to be removed.
+     * @return the element stored in the node that was removed.
+     * @throws IllegalStateException if the node has two children, as it cannot be removed.
+     * @throws InvalidPositionException if the position is invalid or does not correspond to a node in the tree.
+     */
     public E remove(Position<E> p) throws IllegalStateException, InvalidPositionException {
         Node<E> node = validate(p);
-        if(numChildren(p) == 2)
+        
+        // Ensure the node has at most one child, otherwise remove operation can't be performed
+        if (numChildren(p) == 2)
             throw new IllegalStateException("p has two children, can't be removed");
+        
+        // Get the child node (if any) of the node being removed
         Node<E> child = (node.getLeft() != null ? node.getLeft() : node.getRight());
-        if(child != null)
+        
+        // Reassign the child's parent to the current node's parent
+        if (child != null)
             child.setParent(node.getParent());
-        if(node == root)
+        
+        // Update the root if the node being removed is the root
+        if (node == root)
             root = child;
-        else{
+        else {
+            // Update the parent's child reference to bypass the removed node
             Node<E> parent = node.getParent();
-            if(node == parent.getLeft())
+            if (node == parent.getLeft())
                 parent.setLeft(child);
             else
                 parent.setRight(child);
         }
+        
         size--;
+        
+        // Store and clear the node's element and links
         E temp = node.getElement();
         node.setElement(null);
         node.setLeft(null);
         node.setRight(null);
-        node.setParent(node);   // convention for ex nodes
+        node.setParent(node);   // convention for defunct nodes
+        
         return temp;
     }
 

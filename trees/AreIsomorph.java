@@ -1,17 +1,25 @@
 public class AreIsomorph {
 
-    public static <E> boolean areIsomorph (LinkedBinaryTree<E> T1, LinkedBinaryTree<E> T2) throws IllegalArgumentException, InvalidPositionException, EmptyTreeException {
+    public static <E> boolean areIsomorph (LinkedBinaryTree<E> T1, LinkedBinaryTree<E> T2)  {
 
-        if(T1 == null || T2 == null)
-            throw new IllegalArgumentException();
-        
-        if(T1.size() != T2.size())
-            return false;
-        
-        if(T1.isEmpty() && T2.isEmpty())
-            return true;
-        
-        return areIsomorph(T1, T2, T1.root(), T2.root());
+        boolean value = false;
+
+        try {
+            if(T1 == null || T2 == null)
+                throw new IllegalArgumentException();
+            
+            if(T1.size() != T2.size())
+                return false;
+            
+            if(T1.isEmpty() && T2.isEmpty())
+                return true;
+            
+            value = areIsomorph(T1, T2, T1.root(), T2.root());
+        }
+        catch(IllegalArgumentException | InvalidPositionException e) {
+            throw new RuntimeException("areIsomorph failed with error: " + e.getMessage(), e);  // Corrected exception handling
+        }
+        return value;
     }
     
     private static <E> boolean areIsomorph (LinkedBinaryTree<E> T1, LinkedBinaryTree<E> T2, Position<E> p1, Position<E> p2) throws InvalidPositionException {
