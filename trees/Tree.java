@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 public interface Tree<E> extends Iterable<E> {
 
-    Position<E> root() throws EmptyTreeException;
+    Position<E> root();
     Position<E> parent(Position<E> p) throws InvalidPositionException, IndexOutOfBoundsException;
     Iterable<Position<E>> children(Position<E> p) throws InvalidPositionException;
     int numChildren(Position<E> p) throws InvalidPositionException;

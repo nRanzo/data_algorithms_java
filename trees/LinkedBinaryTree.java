@@ -55,12 +55,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     private class ElementIterator implements Iterator<E> {
         Iterator<Position<E>> posIterator;
-        public ElementIterator() {
-            try {
-                posIterator = positions().iterator();
-            } catch (InvalidPositionException | EmptyTreeException e) {
-                throw new RuntimeException("Unexpected exception: ", e);
-            }
+        public ElementIterator() throws IllegalStateException {
+            posIterator = positions().iterator();
         }
         public boolean hasNext() {
             return posIterator.hasNext();
@@ -189,8 +185,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     @Override
-    public Iterable<Position<E>> positions() throws InvalidPositionException, EmptyTreeException {
-        return preorder();
+    public Iterable<Position<E>> positions() throws IllegalStateException {
+        try {
+            return preorder();
+        } catch (InvalidPositionException | EmptyTreeException e) {
+            throw new IllegalStateException("Can't iterate over positions", e);
+        }
     }
 
     public Iterable<Position<E>> preorder() throws InvalidPositionException, EmptyTreeException {
