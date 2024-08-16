@@ -75,6 +75,16 @@ public interface PositionalList<E> extends Iterable<Position<E>> {
     Position<E> addBefore(Position<E> p, E e) throws IllegalArgumentException;
 
     /**
+     * Inserts a new element immediately after the given position in the list.
+     * 
+     * @param p the position after which to insert the new element.
+     * @param e the element to add.
+     * @return the Position<E> of the newly added element.
+     * @throws IllegalArgumentException if the position is invalid.
+     */
+    Position<E> addAfter(Position<E> p, E e) throws IllegalArgumentException;
+
+    /**
      * Replaces the element at the given position with a new element and returns the replaced element.
      * 
      * @param p the position whose element is to be replaced.
