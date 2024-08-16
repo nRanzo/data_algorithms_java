@@ -36,7 +36,7 @@ public abstract class AbstractPQ<K,V> implements PriorityQueue<K,V> {
             k = key;
         }
 
-        protected void setValue(V value) {
+        public void setValue(V value) {
             v = value;
         }
     }

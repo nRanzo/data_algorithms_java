@@ -9,7 +9,7 @@ import priorityqueue.Entry;
 
 
 public class HeapPQ<K,V> extends AbstractPQ<K,V> {
-    private ArrayList<Entry<K,V>> heap = new ArrayList<>();
+    protected ArrayList<Entry<K,V>> heap = new ArrayList<>();
 
     public HeapPQ() {
         super();
