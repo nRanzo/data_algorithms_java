@@ -1,3 +1,5 @@
+package lists;
+
 /**
  * The SinglyLinkedList<E> class provides efficient O(1) operations for adding or removing elements 
  * at the beginning or end, but requires O(n) time for accessing or searching elements. Unlike circular or 

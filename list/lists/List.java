@@ -1,3 +1,5 @@
+package lists;
+
 /**
  * HList interface that defines the methods of a list.
  * Extends the HCollection interface to add list-specific operations.

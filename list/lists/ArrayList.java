@@ -1,3 +1,5 @@
+package lists;
+
 /*  This ArrayList implementation dynamically adjusts its internal array size to efficiently manage memory. 
     When elements are added, the array doubles its capacity if full, ensuring that insertion (both add(Object o) 
     and add(int index, Object element)) remains O(1) amortized. When elements are removed, if the list's size 

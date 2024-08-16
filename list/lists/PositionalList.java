@@ -1,4 +1,6 @@
-public interface PositionalList<E> {
+package lists;
+
+public interface PositionalList<E> extends Iterable<Position<E>> {
 
     /**
      * Returns the number of elements in the list.
@@ -90,4 +92,15 @@ public interface PositionalList<E> {
      * @throws IllegalArgumentException if the position is invalid.
      */
     E remove(Position<E> p) throws IllegalArgumentException;
+
+    /**
+     * Returns an iterable collection of all the positions in the list.
+     * <p>
+     * The returned {@link Iterable} allows for iterating through all positions
+     * in the list in their natural order (from first to last).
+     * 
+     * @return an {@link Iterable} containing all positions in the list.
+     */
+    Iterable<Position<E>> positions();
+
 }

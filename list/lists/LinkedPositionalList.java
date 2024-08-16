@@ -1,11 +1,15 @@
+package lists;
+
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedPositionalList<E> implements PositionalList<E> {
 
-    private static class Node<E> {
+    private static class Node<E> implements Position<E> {
         private E element;
         private Node<E> prev;
         private Node<E> next;
+
         public Node(E e, Node<E> p, Node<E> n) {
             element = e;
             prev = p;
@@ -13,53 +17,53 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
         }
 
         public E getElement() throws IllegalStateException {
-            // by convention null refers to nodes that are no longer valid
             if (next == null)
                 throw new IllegalStateException("Position no longer valid");
             return element;
         }
+
         public Node<E> getPrev() {
             return prev;
         }
+
         public Node<E> getNext() {
             return next;
         }
+
         public void setElement(E e) {
             element = e;
         }
+
         public void setPrev(Node<E> p) {
             prev = p;
         }
+
         public void setNext(Node<E> n) {
             next = n;
         }
     }
 
-    // instance variables
     private Node<E> header;
     private Node<E> trailer;
     private int size = 0;
 
     public LinkedPositionalList() {
-        header = new Node<E>(null, null, null); // can't put trailer as a follower here ...
-        trailer = new Node<E>(null, header, null);
-        header.setNext(trailer);                      // ... so do only now
+        header = new Node<>(null, null, null); 
+        trailer = new Node<>(null, header, null);
+        header.setNext(trailer);                     
     }
 
-    @SuppressWarnings("unchecked")
-    private Node<E> validate(Object object) throws IllegalArgumentException {
-        if(!(object instanceof Node))
-            throw new IllegalArgumentException("Invalid position received");
-        Node<E> node = (Node<E>) object; // safe cast, ignore type safety warn
-        if(node.getNext() == null)
+    private Node<E> validate(Position<E> p) throws IllegalArgumentException {
+        if (!(p instanceof Node))
+            throw new IllegalArgumentException("Invalid position");
+        Node<E> node = (Node<E>) p; 
+        if (node.getNext() == null)
             throw new IllegalArgumentException("Position no longer valid");
         return node;
     }
 
     private Position<E> position(Node<E> node) {
-        if(node == header || node == trailer)
-            return null;        // header and can't be passed to a user
-        return position(node);  // much better choice than a cast
+        return node;  
     }
 
     public int size() {
@@ -71,24 +75,18 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
     }
 
     public Position<E> first() {
-        if(isEmpty())
-            return null;    // or an exception
-        return position(header.getNext());   // first element is the one immediately after header
+        return position(header.getNext());
     }
 
     public Position<E> last() {
-        if(isEmpty())
-            return null;    // or an exception
-        return position(trailer.getPrev());  // last element is the one immediately before trailer
+        return position(trailer.getPrev());
     }
 
-    @Override
     public Position<E> before(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
         return position(node.getPrev());
     }
 
-    @Override
     public Position<E> after(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
         return position(node.getNext());
@@ -97,7 +95,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
     private Position<E> addBetween(E e, Node<E> predec, Node<E> succes) {
         Node<E> newest = new Node<>(e, predec, succes);
         predec.setNext(newest);
-        succes.setPrev(predec);
+        succes.setPrev(newest);
         size++;
         return position(newest);
     }
@@ -105,7 +103,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
     public Position<E> addFirst(E e) {
         return addBetween(e, header, header.getNext());
     }
-    
+
     public Position<E> addLast(E e) {
         return addBetween(e, trailer.getPrev(), trailer);
     }
@@ -119,11 +117,6 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
         Node<E> node = validate(p);
         return addBetween(e, node, node.getNext());
     }
-
-    public E get(Object object) throws IllegalArgumentException {
-        Node<E> node = validate(object);
-        return node.getElement();
-    }    
 
     public E set(Position<E> p, E e) throws IllegalArgumentException {
         Node<E> node = validate(p);
@@ -140,20 +133,56 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
         successor.setPrev(predecessor);
         size--;
         E oldItem = node.getElement();
-        node.setElement(null);  // helps Java's garbage collector
-        node.setNext(null);     // no longer a valid node
-        node.setPrev(null);     // no longer a valid node
+        node.setElement(null);  
+        node.setNext(null);     
+        node.setPrev(null);     
         return oldItem;
     }
 
     public E removeFirst() throws NoSuchElementException {
         if (isEmpty()) throw new NoSuchElementException();
-        return remove(position(header.getNext()));
-    }
-    
-    public E removeLast() throws NoSuchElementException {
-        if (isEmpty()) throw new NoSuchElementException();
-        return remove(position(trailer.getPrev()));
+        return remove(first());
     }
 
+    public E removeLast() throws NoSuchElementException {
+        if (isEmpty()) throw new NoSuchElementException();
+        return remove(last());
+    }
+
+    public Iterable<Position<E>> positions() {
+        return new PositionIterable();
+    }
+
+    private class PositionIterator implements Iterator<Position<E>> {
+        private Position<E> cursor = first(); 
+        private Position<E> recent = null;    
+
+        public boolean hasNext() {
+            return cursor != null;
+        }
+
+        public Position<E> next() throws NoSuchElementException {
+            if (cursor == null) throw new NoSuchElementException("No more elements");
+            recent = cursor;
+            cursor = after(cursor);
+            return recent;
+        }
+
+        public void remove() throws IllegalStateException {
+            if (recent == null) throw new IllegalStateException("Nothing to remove");
+            LinkedPositionalList.this.remove(recent); 
+            recent = null; 
+        }
+    }
+
+    private class PositionIterable implements Iterable<Position<E>> {
+        public Iterator<Position<E>> iterator() {
+            return new PositionIterator();
+        }
+    }
+
+    @Override
+    public Iterator<Position<E>> iterator() {
+        return new PositionIterator(); 
+    }
 }

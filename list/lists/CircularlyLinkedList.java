@@ -1,3 +1,5 @@
+package lists;
+
 /*  The CircularlyLinkedList class provides O(1) complexity for addFirst and rotate operations due to its 
     constant-time pointer updates and maintained tail reference. For addLast, it achieves O(1) complexity 
     if the tail is updated accordingly, unlike a singly linked list which requires O(n) time to traverse 

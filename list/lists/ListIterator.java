@@ -1,3 +1,5 @@
+package lists;
+
 /**
  * HListIterator interface that defines the methods of a list iterator.
  * Extends the HIterator interface and adds operations specific to forward and backward iteration in a list.

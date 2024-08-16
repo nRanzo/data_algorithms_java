@@ -1,3 +1,5 @@
+package lists;
+
 /**
  * HIterator interface that defines the basic methods of an iterator.
  */
