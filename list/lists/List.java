@@ -32,7 +32,7 @@ public interface List<E> extends Collection<E> {
      * @return the element at the specified position
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
      */
-    Object get(int index) throws ArrayIndexOutOfBoundsException;
+    E get(int index) throws ArrayIndexOutOfBoundsException;
 
     /**
      * Returns the index of the first occurrence of the specified element in this list,

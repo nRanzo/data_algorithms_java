@@ -16,13 +16,13 @@ public class ListAdapter<E> implements List<E> {
     /**
     * Object vector used as the concrete basis of the list.
     */
-    protected Vector<Object> vector;
+    protected Vector<E> vector;
 
     /**
      * ListAdapter constructor, it initializes a new vector of Objects.
      */
     public ListAdapter() {
-        this.vector = new Vector<Object>();
+        this.vector = new Vector<E>();
     }
 
     // metodi di HCollection
@@ -33,9 +33,10 @@ public class ListAdapter<E> implements List<E> {
      * @param o the element to add
      * @return true if the add operation was successful
      */
+    @SuppressWarnings("unchecked")
     @Override
     public boolean add(Object o) {
-        vector.addElement(o);
+        vector.addElement((E) o);
         return true;
     }
 
@@ -241,9 +242,10 @@ public class ListAdapter<E> implements List<E> {
      * @param element l'elemento da aggiungere
      * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void add(int index, Object element) {
-        vector.insertElementAt(element, index);
+        vector.insertElementAt((E) element, index);
     }
 
     /**
@@ -273,7 +275,7 @@ public class ListAdapter<E> implements List<E> {
      * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
      */
     @Override
-    public Object get(int index) throws ArrayIndexOutOfBoundsException {
+    public E get(int index) throws ArrayIndexOutOfBoundsException {
         return vector.elementAt(index);
     }
 
@@ -345,11 +347,12 @@ public class ListAdapter<E> implements List<E> {
      * @return l'elemento precedente nella posizione specificata
      * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Object set(int index, Object element) throws ArrayIndexOutOfBoundsException {
+    public E set(int index, Object element) throws ArrayIndexOutOfBoundsException {
         Object oldElement = vector.elementAt(index);
-        vector.setElementAt(element, index);
-        return oldElement;
+        vector.setElementAt((E)element, index);
+        return (E)oldElement;
     }
 
     /**
@@ -389,7 +392,6 @@ public class ListAdapter<E> implements List<E> {
          * @return il prossimo elemento nella lista
          * @throws ArrayIndexOutOfBoundsException se non ci sono più elementi
          */
-        @SuppressWarnings("unchecked")
         public E next() throws ArrayIndexOutOfBoundsException {
             int i = cursor;
             if (i >= vector.size()) {
@@ -445,7 +447,6 @@ public class ListAdapter<E> implements List<E> {
          * @return l'elemento precedente nella lista
          * @throws ArrayIndexOutOfBoundsException se non ci sono elementi precedenti
          */
-        @SuppressWarnings("unchecked")
         public E previous() throws ArrayIndexOutOfBoundsException {
             int i = cursor - 1;
             if (i < 0) {
@@ -461,7 +462,6 @@ public class ListAdapter<E> implements List<E> {
          * @return l'elemento successivo nella lista
          * @throws ArrayIndexOutOfBoundsException se non ci sono elementi precedenti
          */
-        @SuppressWarnings("unchecked")
         public E next() throws ArrayIndexOutOfBoundsException {
             int i = cursor+ 1;
             if (i > size()) {
@@ -495,11 +495,12 @@ public class ListAdapter<E> implements List<E> {
          * @param o il nuovo elemento
          * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
          */
+        @SuppressWarnings("unchecked")
         public void set(Object o) throws ArrayIndexOutOfBoundsException {
             if (lastRet < 0) {
                 throw new IllegalStateException();
             }
-            vector.setElementAt(o, lastRet);
+            vector.setElementAt((E) o, lastRet);
         }
 
         /**
@@ -508,9 +509,10 @@ public class ListAdapter<E> implements List<E> {
          * @param o l'elemento da aggiungere
          * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
          */
+        @SuppressWarnings("unchecked")
         public void add(Object o) throws ArrayIndexOutOfBoundsException {
             int i = cursor;
-            vector.insertElementAt(o, i);
+            vector.insertElementAt((E) o, i);
             cursor = i + 1;
             lastRet = -1;
         }
@@ -614,7 +616,7 @@ public class ListAdapter<E> implements List<E> {
          * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
          */
         @Override
-        public Object get(int index) throws ArrayIndexOutOfBoundsException {
+        public E get(int index) throws ArrayIndexOutOfBoundsException {
             return super.get(index);
         }
 
@@ -742,11 +744,12 @@ public class ListAdapter<E> implements List<E> {
          * @return l'elemento precedente nella posizione specificata
          * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
          */
+        @SuppressWarnings("unchecked")
         @Override
-        public Object set(int index, Object element) throws ArrayIndexOutOfBoundsException {
+        public E set(int index, Object element) throws ArrayIndexOutOfBoundsException {
             Object oldElement = super.set(index, element);
             parent.set(indexFirst + index, element);
-            return oldElement;
+            return (E) oldElement;
         }
 
         /**
