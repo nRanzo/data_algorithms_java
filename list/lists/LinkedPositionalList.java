@@ -1,3 +1,14 @@
+/**
+ * A linked list implementation of the {@link PositionalList} interface.
+ * <p>
+ * This implementation maintains a doubly linked list with a header and a trailer node,
+ * allowing for efficient insertion and removal of elements at both ends of the list as well as
+ * in-between. It provides methods to add, remove, and access elements at specific positions
+ * in the list.
+ *
+ * @param <E> the type of elements stored in the list
+ */
+
 package lists;
 
 import java.util.Iterator;
@@ -5,6 +16,12 @@ import java.util.NoSuchElementException;
 
 public class LinkedPositionalList<E> implements PositionalList<E> {
 
+    /**
+     * A node in the linked positional list, which holds an element and references
+     * to its previous and next nodes.
+     *
+     * @param <E> the type of element stored in the node
+     */
     private static class Node<E> implements Position<E> {
         private E element;
         private Node<E> prev;
@@ -53,6 +70,13 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
         header.setNext(trailer);                     
     }
 
+    /**
+     * Validates the given position to ensure it is a valid node in the list.
+     *
+     * @param p the position to validate
+     * @return the node corresponding to the position
+     * @throws IllegalArgumentException if the position is invalid or no longer valid
+     */
     private Node<E> validate(Position<E> p) throws IllegalArgumentException {
         if (!(p instanceof Node))
             throw new IllegalArgumentException("Invalid position");
