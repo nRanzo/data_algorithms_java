@@ -39,10 +39,9 @@ public class HeapPQ<K,V> extends AbstractPQ<K,V> {
         return right(j) < heap.size();
     }
 
-    @SuppressWarnings("unchecked")
     protected void swap(int i, int j) throws IllegalArgumentException{
         try {
-            SimpleEntry<?,?> temp = (SimpleEntry<?,?>) heap.get(i);
+            Entry<K,V> temp = (Entry<K,V>) heap.get(i);
             heap.set(i, heap.get(j));
             heap.set(j, temp);
         }
@@ -52,7 +51,7 @@ public class HeapPQ<K,V> extends AbstractPQ<K,V> {
 
     }
 
-    protected void uphead(int j) {
+    protected void upheap(int j) {
         while(j > 0){   // goes on until root
             int p = parent(j);
             if(compare(heap.get(j), heap.get(p)) >= 0)
@@ -90,5 +89,23 @@ public class HeapPQ<K,V> extends AbstractPQ<K,V> {
         if(heap.isEmpty())
             return null;
         return heap.get(0);
+    }
+
+    public Entry<K,V> insert(K key, V value) throws IllegalArgumentException {
+        checkKey(key);
+        SimpleEntry<K,V> newest = new PQEntry<>(key, value);
+        heap.add(newest);           // adds to the end of the list
+        upheap(heap.size() - 1);    // runs up-heap for the newly added entry
+        return newest;
+    }
+
+    public Entry<K,V> removeMin() {
+        if(heap.isEmpty())
+            return null;
+        Entry<K,V> olditem = (SimpleEntry<K,V>) heap.get(0);
+        swap(0, heap.size() - 1);     // move the minimum entry to the end
+        heap.remove(heap.size() - 1);   // so now you can remove it
+        donwheap(0);
+        return olditem;
     }
 }
