@@ -32,15 +32,15 @@ public class UnsortedLinkedPQ<K,V> extends AbstractPQ<K,V> {
         return newest;
     }
 
-    public SimpleEntry<K,V> min() {
+    public SimpleEntry<K,V> min() throws EmptyPriorityQueueException {
         if(list.isEmpty())
-            return null;
+            throw new EmptyPriorityQueueException();
         return findMin().getElement();
     }
 
     public SimpleEntry<K,V> removeMin() {
         if(list.isEmpty())
-            return null;
+            throw new EmptyPriorityQueueException();
         return list.remove(findMin());
     }
 

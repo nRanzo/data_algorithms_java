@@ -84,9 +84,9 @@ public abstract class AbstractPQ<K,V> implements PriorityQueue<K,V> {
 
     /** Returns (but does not remove) an entry with the minimal key. */
     @Override
-    public abstract Entry<K, V> min();
+    public abstract Entry<K, V> min() throws EmptyPriorityQueueException ;
 
     /** Removes and returns an entry with the minimal key. */
     @Override
-    public abstract Entry<K, V> removeMin();
+    public abstract Entry<K, V> removeMin() throws EmptyPriorityQueueException ;
 }
