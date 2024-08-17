@@ -1,3 +1,5 @@
+import lists.Position;
+
 public interface BinaryTree<E> extends Tree<E> {
     // If p has a left child, returns its position, otherwise null
     Position<E> left(Position<E> p) throws InvalidPositionException;

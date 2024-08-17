@@ -1,3 +1,8 @@
+package lists;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * A linked list implementation of the {@link PositionalList} interface.
  * <p>
@@ -8,12 +13,6 @@
  *
  * @param <E> the type of elements stored in the list
  */
-
-package lists;
-
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 public class LinkedPositionalList<E> implements PositionalList<E> {
 
     /**

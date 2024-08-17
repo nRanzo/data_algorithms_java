@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import lists.Position;
+
 public class TreeNode<E> implements Position<E> {
     private E element;
     private TreeNode<E> parent;

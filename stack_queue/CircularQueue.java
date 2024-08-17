@@ -1,3 +1,5 @@
+package stack_queue;
+
 public interface CircularQueue<E> extends Queue<E> {
     /**
      * Moves its initial element to the end of the queue. If the queue is empty it does nothing.

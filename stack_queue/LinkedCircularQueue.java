@@ -1,3 +1,5 @@
+package stack_queue;
+
 /**
  * LinkedCircularQueue implementation that uses a CircularQueue as its internal storage.
  * This class delegates all queue operations to an instance of CircularQueue.

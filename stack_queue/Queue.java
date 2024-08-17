@@ -1,3 +1,5 @@
+package stack_queue;
+
 /*  The Queue interface defines the queue ADT, characterized by the first-in first-out principle for 
     managing insertions and removals */
 

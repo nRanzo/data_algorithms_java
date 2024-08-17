@@ -1,3 +1,5 @@
+import lists.Position;
+
 public class AreIsomorph {
 
     public static <E> boolean areIsomorph (LinkedBinaryTree<E> T1, LinkedBinaryTree<E> T2)  {

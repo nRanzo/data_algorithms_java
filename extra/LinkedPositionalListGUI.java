@@ -1,4 +1,8 @@
 import javax.swing.*;
+
+import lists.LinkedPositionalList;
+import lists.Position;
+
 import java.awt.*;
 import java.awt.event.*;
 

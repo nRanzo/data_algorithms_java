@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import lists.Position;
+
 public class TreeImpl<E> extends AbstractTree<E> {
 
     private TreeNode<E> root;  // Root node of the tree

@@ -1,5 +1,7 @@
 import java.util.Iterator;
 
+import lists.Position;
+
 public interface Tree<E> extends Iterable<E> {
 
     Position<E> root() throws InvalidPositionException;

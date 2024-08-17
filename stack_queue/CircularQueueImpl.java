@@ -1,3 +1,5 @@
+package stack_queue;
+
 /**
  * CircularQueue implementation based on an array. This implementation efficiently handles the queue operations 
  * and maintains constant time complexity for enqueue, dequeue, and rotate operations, while dynamically resizing 

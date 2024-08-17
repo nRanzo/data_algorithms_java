@@ -1,6 +1,10 @@
+package stack_queue;
+
 /* Demonstration that you can re-use the code you have already made with ease. */
 
 import java.util.NoSuchElementException;
+
+import lists.SinglyLinkedList;
 
 /**
  * LinkedStack is a stack implementation using a singly linked list.

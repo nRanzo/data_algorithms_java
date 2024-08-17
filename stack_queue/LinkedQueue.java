@@ -1,3 +1,7 @@
+package stack_queue;
+
+import lists.SinglyLinkedList;
+
 /* Demonstration that you can re-use the code you have already made with ease. */
 
 /**
