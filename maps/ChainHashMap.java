@@ -5,8 +5,8 @@ import lists.ArrayList;
 import priorityqueue.Entry;
 
 /**
- * Implementation of a hash map using separate chaining with an array of `UnsortedTableMap` instances as buckets.
- * Each bucket is an `UnsortedTableMap`, which handles collisions by storing multiple entries with the same hash value.
+ * Implementation of a hash map using separate chaining with an array of UnsortedTableMap instances as buckets.
+ * Each bucket is an UnsortedTableMap, which handles collisions by storing multiple entries with the same hash value.
  * 
  * @param <K> The type of the keys.
  * @param <V> The type of the values.
