@@ -207,9 +207,10 @@ public class ListAdapter<E> implements List<E> {
      *
      * @return un array contenente tutti gli elementi della lista
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Object[] toArray() {
-        Object[] array = new Object[vector.size()];
+    public E[] toArray() {
+        E[] array = (E[]) new Object[vector.size()];
         vector.copyInto(array);
         return array;
     }
@@ -222,9 +223,9 @@ public class ListAdapter<E> implements List<E> {
      * @return un array contenente tutti gli elementi della lista
      */
     @Override
-    public Object[] toArray(Object[] a) {
+    public E[] toArray(E[] a) {
         if (a.length < vector.size()) {
-            return toArray();
+            return (E[]) toArray();
         }
         vector.copyInto(a);
         if (a.length > vector.size()) {
@@ -333,8 +334,8 @@ public class ListAdapter<E> implements List<E> {
      * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
      */
     @Override
-    public Object remove(int index) throws ArrayIndexOutOfBoundsException {
-        Object element = vector.elementAt(index);
+    public E remove(int index) throws ArrayIndexOutOfBoundsException {
+        E element = vector.elementAt(index);
         vector.removeElementAt(index);
         return element;
     }
@@ -653,8 +654,8 @@ public class ListAdapter<E> implements List<E> {
          * @throws ArrayIndexOutOfBoundsException se l'indice è fuori dall'intervallo valido
          */
         @Override
-        public Object remove(int index) throws ArrayIndexOutOfBoundsException {
-            Object element = super.remove(index);
+        public E remove(int index) throws ArrayIndexOutOfBoundsException {
+            E element = super.remove(index);
             parent.remove(indexFirst + index);
             size--;
             return element;

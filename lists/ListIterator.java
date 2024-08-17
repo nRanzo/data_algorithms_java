@@ -13,7 +13,7 @@ public interface ListIterator<E> extends Iterable<E> {
      * @param o the element to insert
      * @throws ArrayIndexOutOfBoundsException if an exception occurs during the operation
      */
-    void add(Object o) throws ArrayIndexOutOfBoundsException;
+    void add(E o) throws ArrayIndexOutOfBoundsException;
 
     /**
      * Checks if there is a previous element in the list.
@@ -42,7 +42,7 @@ public interface ListIterator<E> extends Iterable<E> {
      * @return the previous element in the list
      * @throws ArrayIndexOutOfBoundsException if an exception occurs during the operation
      */
-    Object previous() throws ArrayIndexOutOfBoundsException;
+    E previous() throws ArrayIndexOutOfBoundsException;
 
     /**
      * Returns the following element in the list and moves the iterator backward.
@@ -50,7 +50,7 @@ public interface ListIterator<E> extends Iterable<E> {
      * @return the following element in the list
      * @throws ArrayIndexOutOfBoundsException if an exception occurs during the operation
      */
-    Object next() throws ArrayIndexOutOfBoundsException;
+    E next() throws ArrayIndexOutOfBoundsException;
 
     /**
      * Returns the index of the element that would be returned by the next call to {@code previous()}.
@@ -65,6 +65,6 @@ public interface ListIterator<E> extends Iterable<E> {
      * @param o the new element to set
      * @throws ArrayIndexOutOfBoundsException if an exception occurs during the operation
      */
-    void set(Object o) throws ArrayIndexOutOfBoundsException;
+    void set(E o) throws ArrayIndexOutOfBoundsException;
 
 }

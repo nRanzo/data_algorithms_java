@@ -14,7 +14,7 @@ public interface Collection<E> extends Iterable<E> {
      * @param o the element to add
      * @return true if the element was successfully added, otherwise false
      */
-    boolean add(Object o);
+    boolean add(E o);
 
     /**
      * Adds all elements of the specified collection to this collection.
@@ -35,7 +35,7 @@ public interface Collection<E> extends Iterable<E> {
      * @param o the element to search for in the collection
      * @return true if the collection contains the element, otherwise false
      */
-    boolean contains(Object o);
+    boolean contains(E o);
 
     /**
      * Checks if the collection contains all elements of the specified collection.
@@ -80,7 +80,7 @@ public interface Collection<E> extends Iterable<E> {
      * @param o the element to remove
      * @return true if the element was successfully removed, otherwise false
      */
-    boolean remove(Object o);
+    boolean remove(E o);
 
     /**
      * Removes all elements of the specified collection from this collection.
@@ -111,7 +111,7 @@ public interface Collection<E> extends Iterable<E> {
      *
      * @return an array containing all elements in the collection
      */
-    Object[] toArray();
+    E[] toArray();
 
     /**
      * Returns an array containing all elements in the collection,
@@ -121,5 +121,5 @@ public interface Collection<E> extends Iterable<E> {
      * @param a the array in which to place the collection's elements
      * @return an array containing all elements in the collection
      */
-    Object[] toArray(Object[] a);
+    E[] toArray(E[] a);
 }

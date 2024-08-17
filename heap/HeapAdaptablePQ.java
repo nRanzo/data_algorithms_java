@@ -10,7 +10,7 @@ import priorityqueue.Entry;
  * This class extends the standard heap-based priority queue to support 
  * additional operations such as removal and value replacement of arbitrary 
  * elements. The main feature of this implementation is the use of 
- * `AdaptablePQEntry`, which tracks the position of each entry in the heap, 
+ * AdaptablePQEntry, which tracks the position of each entry in the heap, 
  * allowing efficient updates and removals.
  * 
  * <p>This flexibility comes at the cost of increased implementation 

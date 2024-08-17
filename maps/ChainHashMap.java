@@ -13,7 +13,7 @@ import priorityqueue.Entry;
  */
 public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
 
-    /** Array of buckets, where each bucket is an `UnsortedTableMap` instance. */
+    /** Array of buckets, where each bucket is an UnsortedTableMap instance. */
     private UnsortedTableMap<K, V>[] table;
 
     /**

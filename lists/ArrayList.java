@@ -94,13 +94,13 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
-    public boolean contains(Object o) {
+    public boolean contains(E o) {
         return indexOf(o) >= 0;
     }
 
     @Override
     public boolean containsAll(Collection<E> c) {
-        for (Object o : c.toArray()) {
+        for (E o : c.toArray()) {
             if (!contains(o)) {
                 return false;
             }
@@ -133,17 +133,16 @@ public class ArrayList<E> implements List<E> {
         return data[index];
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Object set(int index, Object element) throws ArrayIndexOutOfBoundsException {
+    public E set(int index, E element) throws ArrayIndexOutOfBoundsException {
         checkIndex(index, size);
-        Object oldElement = data[index];
+        E oldElement = data[index];
         data[index] = (E) element;
         return oldElement;
     }
 
     @Override
-    public int indexOf(Object o) {
+    public int indexOf(E o) {
         for (int i = 0; i < size; i++) {
             if (data[i].equals(o)) {
                 return i;
@@ -153,7 +152,7 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
-    public int lastIndexOf(Object o) {
+    public int lastIndexOf(E o) {
         for (int i = size - 1; i >= 0; i--) {
             if (data[i].equals(o)) {
                 return i;
@@ -163,9 +162,9 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
-    public Object remove(int index) throws ArrayIndexOutOfBoundsException {
+    public E remove(int index) throws ArrayIndexOutOfBoundsException {
         checkIndex(index, size);
-        Object removedElement = data[index];
+        E removedElement = data[index];
         for (int k = index; k < size - 1; k++) {
             data[k] = data[k + 1];
         }
@@ -180,7 +179,7 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
-    public boolean remove(Object o) {
+    public boolean remove(E o) {
         int index = indexOf(o);
         if (index >= 0) {
             remove(index);
@@ -192,7 +191,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public boolean removeAll(Collection<E> c) {
         boolean modified = false;
-        for (Object o : c.toArray()) {
+        for (E o : c.toArray()) {
             while (remove(o)) {
                 modified = true;
             }
@@ -213,15 +212,16 @@ public class ArrayList<E> implements List<E> {
         return modified;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object[] toArray() {
-        Object[] arrayCopy = new Object[size];
+    public E[] toArray() {
+        E[] arrayCopy = (E[]) new Object[size];
         System.arraycopy(data, 0, arrayCopy, 0, size);
         return arrayCopy;
     }
 
     @Override
-    public Object[] toArray(Object[] a) {
+    public E[] toArray(E[] a) {
         if (a.length < size) {
             return toArray();
         }
@@ -260,7 +260,7 @@ public class ArrayList<E> implements List<E> {
 
     @SuppressWarnings("unchecked")
     private void resize(int newCapacity) {
-        Object[] newData = new Object[newCapacity];
+        E[] newData = (E[]) new Object[newCapacity];
         System.arraycopy(data, 0, newData, 0, size);
         data = (E[]) newData;
     }
@@ -294,7 +294,7 @@ public class ArrayList<E> implements List<E> {
         }
 
         @Override
-        public Object previous() {
+        public E previous() {
             if (!hasPrevious()) {
                 throw new NoSuchElementException();
             }
@@ -319,7 +319,7 @@ public class ArrayList<E> implements List<E> {
         }
 
         @Override
-        public void set(Object e) {
+        public void set(E e) {
             ArrayList.this.set(currentIndex - 1, e);
         }
 

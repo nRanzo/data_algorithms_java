@@ -13,7 +13,7 @@ public interface List<E> extends Collection<E> {
      * @param index   the index at which to insert the element
      * @param element the element to be inserted
      */
-    void add(int index, Object element);
+    void add(int index, E element);
 
     /**
      * Inserts all elements of the specified collection into this list,
@@ -41,7 +41,7 @@ public interface List<E> extends Collection<E> {
      * @param o the element to search for
      * @return the index of the first occurrence of the element, or -1 if it is not present
      */
-    int indexOf(Object o);
+    int indexOf(E o);
 
     /**
      * Returns the index of the last occurrence of the specified element in this list,
@@ -51,7 +51,7 @@ public interface List<E> extends Collection<E> {
      * @return the index of the last occurrence of the element, or -1 if it is not present
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    int lastIndexOf(Object o) throws IndexOutOfBoundsException;
+    int lastIndexOf(E o) throws IndexOutOfBoundsException;
 
     /**
      * Returns an iterator over this list.
@@ -75,7 +75,7 @@ public interface List<E> extends Collection<E> {
      * @return the element previously at the specified position
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
      */
-    Object remove(int index) throws ArrayIndexOutOfBoundsException;
+    E remove(int index) throws ArrayIndexOutOfBoundsException;
 
     /**
      * Replaces the element at the specified position in this list with the specified element.
@@ -85,7 +85,7 @@ public interface List<E> extends Collection<E> {
      * @return the element previously at the specified position
      * @throws ArrayIndexOutOfBoundsException if the index is out of range
      */
-    Object set(int index, Object element) throws ArrayIndexOutOfBoundsException;
+    E set(int index, E element) throws ArrayIndexOutOfBoundsException;
 
     /**
      * Returns a view of this list between the specified indices.

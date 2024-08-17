@@ -312,13 +312,14 @@ public class ListAdapterTest<E> {
      * Verifica che l'array specificato venga riempito correttamente
      * con gli elementi della lista e della sublista.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testToArrayWithParameter() {
-        Object[] array = new Object[5];
+        E[] array = (E[]) new Object[5];
         list.toArray(array);
         assertEquals("Element1", array[0]);
 
-        array = new Object[3];
+        array = (E[]) new Object[3];
         sublist.toArray(array);
         assertEquals("Element2", array[0]);
     }

@@ -18,7 +18,7 @@ public interface Iterator<E> {
      * @return the next element in the iterator
      * @throws ArrayIndexOutOfBoundsException if there are no more elements
      */
-    Object next() throws ArrayIndexOutOfBoundsException;
+    E next() throws ArrayIndexOutOfBoundsException;
 
     /**
      * Removes the last element returned by the iterator from the underlying collection.
