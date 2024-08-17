@@ -1,3 +1,6 @@
+import stack_queue.Deque;
+import stack_queue.LinkedDeque;
+
 public class Josephus {
     /**
      * Determines the winner of the Josephus problem using a deque.
