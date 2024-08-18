@@ -3,8 +3,9 @@ package maps;
 import java.util.Comparator;
 
 import priorityqueue.Entry;
+import trees.AbstractBinaryTree;
 
-public abstract class AbstractSortedMap<K, V> extends AbstractMap<K, V> {
+public abstract class AbstractSortedMap<K, V> extends AbstractBinaryTree<Entry<K,V>> {
 
     private Comparator<K> comp; // The comparator used for sorting
 

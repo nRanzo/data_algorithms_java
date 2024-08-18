@@ -9,7 +9,7 @@ import trees.LinkedBinaryTree;
  * A binary tree implementation that supports balancing operations, suitable for building 
  * balanced search trees like AVL trees or red-black trees.
  * 
- * <p>This class extends `LinkedBinaryTree` to include operations for node rotation 
+ * <p>This class extends LinkedBinaryTree to include operations for node rotation 
  * and restructuring, essential for maintaining balance in search trees. It uses 
  * auxiliary data stored in each node to assist with balancing operations.</p>
  * 
@@ -98,7 +98,7 @@ public class BalanceableBT<K,V> extends LinkedBinaryTree<Entry<K,V>> {
      * 
      * @param parent The parent node.
      * @param child The child node.
-     * @param makeLeftChild If `true`, the child becomes the left child of the parent; otherwise, it becomes the right child.
+     * @param makeLeftChild If true, the child becomes the left child of the parent; otherwise, it becomes the right child.
      */
     private void relink(Node<Entry<K,V>> parent, Node<Entry<K,V>> child, boolean makeLeftChild) {
         child.setParent(parent);
