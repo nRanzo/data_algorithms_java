@@ -1,22 +1,24 @@
-public class EmptyTreeException extends Exception {
+package trees;
 
+public class InvalidPositionException extends Exception {
+    
     // Default constructor
-    public EmptyTreeException() {
+    public InvalidPositionException() {
         super();
     }
     
     // Constructor that accepts a message
-    public EmptyTreeException(String message) {
+    public InvalidPositionException(String message) {
         super(message);
     }
     
     // Constructor that accepts a message and a cause
-    public EmptyTreeException(String message, Throwable cause) {
+    public InvalidPositionException(String message, Throwable cause) {
         super(message, cause);
     }
     
     // Constructor that accepts a cause
-    public EmptyTreeException(Throwable cause) {
+    public InvalidPositionException(Throwable cause) {
         super(cause);
     }
 }

@@ -1,3 +1,5 @@
+package trees;
+
 import lists.Position;
 
 public interface BinaryTree<E> extends Tree<E> {

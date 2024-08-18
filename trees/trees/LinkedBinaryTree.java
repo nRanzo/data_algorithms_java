@@ -1,3 +1,5 @@
+package trees;
+
 /*  In this implementation I use a convention to identify nodes that used to belong to the tree but now 
     no longer do. When a node leaves the tree, it is not deleted, but a reference of thath node is assigned 
     to its parent. By doing that, even if its element is preserved, the parent node (and not even the children)
