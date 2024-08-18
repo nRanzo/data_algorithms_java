@@ -67,7 +67,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns the number of entries in the map.
+     * Returns the number of entries in the map. Time complexity O(1).
      *
      * @return The number of entries.
      */
@@ -77,6 +77,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
 
     /**
      * Returns the value associated with the specified key, or null if no such key exists.
+     * Time complexity O(log n).
      *
      * @param key The key whose associated value is to be returned.
      * @return The value associated with the key, or null if not found.
@@ -90,6 +91,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
 
     /**
      * Inserts a key-value pair into the map, or updates the value if the key already exists.
+     * Time complexity O(n), O(log n) if the map has already an entry with this key.
      *
      * @param key The key to be inserted or updated.
      * @param value The value to associate with the key.
@@ -104,7 +106,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Removes the entry for the specified key from the map.
+     * Removes the entry for the specified key from the map. Time complexity O(n).
      *
      * @param key The key whose entry is to be removed.
      * @return The value associated with the removed key, or null if no such key existed.
@@ -129,7 +131,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns the entry with the smallest key in the map.
+     * Returns the entry with the smallest key in the map. Time complexity O(1).
      *
      * @return The entry with the smallest key, or null if the map is empty.
      */
@@ -138,7 +140,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns the entry with the largest key in the map.
+     * Returns the entry with the largest key in the map. Time complexity O(1).
      *
      * @return The entry with the largest key, or null if the map is empty.
      */
@@ -147,7 +149,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns the entry with the smallest key greater than or equal to the specified key.
+     * Returns the entry with the smallest key greater than or equal to the specified key. Time complexity O(log n).
      *
      * @param key The key to search for.
      * @return The entry with the smallest key greater than or equal to the specified key, or null if no such key exists.
@@ -157,7 +159,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns the entry with the largest key less than or equal to the specified key.
+     * Returns the entry with the largest key less than or equal to the specified key. Time complexity O(log n).
      *
      * @param key The key to search for.
      * @return The entry with the largest key less than or equal to the specified key, or null if no such key exists.
@@ -170,7 +172,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns the entry with the largest key strictly less than the specified key.
+     * Returns the entry with the largest key strictly less than the specified key. Time complexity O(log n).
      *
      * @param key The key to search for.
      * @return The entry with the largest key strictly less than the specified key, or null if no such key exists.
@@ -180,7 +182,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns the entry with the smallest key strictly greater than the specified key.
+     * Returns the entry with the smallest key strictly greater than the specified key. Time complexity O(log n).
      *
      * @param key The key to search for.
      * @return The entry with the smallest key strictly greater than the specified key, or null if no such key exists.
@@ -209,7 +211,7 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns an iterable collection of all entries in the map.
+     * Returns an iterable collection of all entries in the map. Time complexity O(n).
      *
      * @return An iterable collection of all entries.
      */
@@ -218,7 +220,8 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     /**
-     * Returns an iterable collection of entries with keys in the range [fromKey, toKey).
+     * Returns an iterable collection of entries with keys in the range [fromKey, toKey). Time complexity O(s + log n)
+     * when returned a container with s entries
      *
      * @param fromKey The lower bound (inclusive).
      * @param toKey The upper bound (exclusive).
