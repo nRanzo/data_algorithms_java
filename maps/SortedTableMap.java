@@ -19,14 +19,14 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     private ArrayList<MapEntry<K, V>> table = new ArrayList<>();
 
     /**
-     * Constructs an empty `SortedTableMap` with natural ordering of keys.
+     * Constructs an empty SortedTableMap with natural ordering of keys.
      */
     public SortedTableMap() {
         super();
     }
 
     /**
-     * Constructs an empty `SortedTableMap` with a custom comparator for ordering keys.
+     * Constructs an empty SortedTableMap with a custom comparator for ordering keys.
      *
      * @param comp The comparator used to order the keys.
      */
@@ -52,8 +52,8 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
             return mid;
         else if (comp < 0)
             return findIndex(key, low, mid - 1);
-        // else
-        return findIndex(key, mid + 1, high);
+        else
+            return findIndex(key, mid + 1, high);
     }
 
     /**
@@ -230,4 +230,5 @@ public class SortedTableMap<K, V> extends AbstractSortedMap<K, V> {
     public Iterable<Entry<K, V>> subMap(K fromKey, K toKey) {
         return snapshot(findIndex(fromKey), toKey);
     }
+
 }

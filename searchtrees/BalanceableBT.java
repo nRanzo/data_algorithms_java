@@ -62,7 +62,7 @@ public class BalanceableBT<K,V> extends LinkedBinaryTree<Entry<K,V>> {
      * 
      * @param p The position whose auxiliary value is to be retrieved.
      * @return The auxiliary value.
-     * @throws ClassCastException If the position is not of type `BSTNode`.
+     * @throws ClassCastException If the position is not of type BSTNode.
      */
     public int getAux(Position<Entry<K,V>> p) {
         return ((BSTNode<Entry<K,V>>) p).getAux();
@@ -73,7 +73,7 @@ public class BalanceableBT<K,V> extends LinkedBinaryTree<Entry<K,V>> {
      * 
      * @param p The position whose auxiliary value is to be set.
      * @param newAux The new auxiliary value.
-     * @throws ClassCastException If the position is not of type `BSTNode`.
+     * @throws ClassCastException If the position is not of type BSTNode.
      */
     public void setAux(Position<Entry<K,V>> p, int newAux) {
         ((BSTNode<Entry<K,V>>) p).setAux(newAux);
@@ -86,7 +86,7 @@ public class BalanceableBT<K,V> extends LinkedBinaryTree<Entry<K,V>> {
      * @param parent The parent node.
      * @param left The left child node.
      * @param right The right child node.
-     * @return A new `BSTNode` instance.
+     * @return A new BSTNode instance.
      */
     protected Node<Entry<K,V>> createNode(Entry<K,V> e, Node<Entry<K,V>> parent, 
                                           Node<Entry<K,V>> left, Node<Entry<K,V>> right) {

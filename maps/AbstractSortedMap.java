@@ -2,11 +2,16 @@ package maps;
 
 import java.util.Comparator;
 
+import lists.Position;
 import priorityqueue.Entry;
-import trees.AbstractBinaryTree;
 
-public abstract class AbstractSortedMap<K, V> extends AbstractBinaryTree<Entry<K,V>> {
-
+/**
+ * An abstract base class to assist in creating sorted map implementations.
+ * This class provides a comparator and methods for comparing keys and entries.
+ * It does not handle tree structures directly; that is left to concrete subclasses.
+ */
+public abstract class AbstractSortedMap<K, V> extends AbstractMap<K,V> {
+    
     private Comparator<K> comp; // The comparator used for sorting
 
     /**
@@ -52,4 +57,28 @@ public abstract class AbstractSortedMap<K, V> extends AbstractBinaryTree<Entry<K
     protected int compare(K key, Entry<K, V> entry) {
         return compare(key, entry.getKey());
     }
+
+    /**
+     * Placeholder for rebalancing after access. Should be implemented in subclasses (e.g., for splay trees).
+     */
+    protected void rebalanceAccess(Position<Entry<K,V>> p) {
+        // No operation in the base class; intended to be overridden by subclasses
+    }
+    
+    /**
+     * Placeholder for rebalancing after insertion. Should be implemented in subclasses (e.g., for AVL or Red-Black trees).
+     */
+    protected void rebalanceInsert(Position<Entry<K,V>> p) {
+        // No operation in the base class; intended to be overridden by subclasses
+    }
+    
+    /**
+     * Placeholder for rebalancing after deletion. Should be implemented in subclasses if needed.
+     */
+    protected void rebalanceDelete(Position<Entry<K,V>> p) {
+        // No operation in the base class; intended to be overridden by subclasses
+    }
+
+    // Additional common map methods can be added here (e.g., get, put, remove), 
+    // which can be utilized by subclasses like TreeMap.
 }

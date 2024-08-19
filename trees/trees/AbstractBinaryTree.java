@@ -35,11 +35,12 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements B
     }
 
     /**
-     * Recursively performs an in-order traversal of the subtree rooted at the given position.
+     * Recursively performs an in-order (symmetrical) traversal of the subtree rooted at the given position.
      * 
      * <p>This method traverses the left subtree, visits the current node, and then traverses the right subtree, 
      * adding each visited position to the provided snapshot list. It is called internally by the 
-     * {@code inorder()} method to gather the positions in in-order sequence.</p>
+     * {@code inorder()} method to gather the positions in in-order sequence. This traversal is also known as 
+     * symmetrical order traversal.</p>
      * 
      * @param p the position representing the root of the subtree to traverse.
      * @param snapshot the list that accumulates the positions in in-order sequence.

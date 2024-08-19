@@ -24,6 +24,23 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     }
 
     /**
+     * Factory method to create a new {@link Entry} instance.
+     * <p>
+     * This method allows subclasses to create instances of {@link MapEntry} 
+     * without directly accessing the {@code MapEntry} class, maintaining 
+     * encapsulation within the {@code maps} package. The method is protected 
+     * so that only subclasses within the hierarchy can invoke it.
+     * </p>
+     *
+     * @param key   the key to be stored in the entry
+     * @param value the value to be stored in the entry
+     * @return a new {@code Entry} instance containing the specified key and value
+     */
+    protected Entry<K, V> createMapEntry(K key, V value) {
+        return new MapEntry<>(key, value);
+    }
+
+    /**
      * A concrete implementation of the Entry interface to represent a key-value pair.
      * 
      * @param <K> The type of keys maintained by this entry.
