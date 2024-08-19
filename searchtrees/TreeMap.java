@@ -147,7 +147,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      * @return true if the position is the root, false otherwise.
      * @throws InvalidPositionException if the position is invalid (e.g., null or not part of the tree).
      */
-    private boolean isRoot(Position<Entry<K, V>> p) throws InvalidPositionException {
+    protected boolean isRoot(Position<Entry<K, V>> p) throws InvalidPositionException {
         return tree.isRoot(p);
     }
 
@@ -528,7 +528,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      *
      * @param p The position where the insertion occurred.
      */
-    protected void rebalanceInsert(Position<Entry<K, V>> p) {
+    protected void rebalanceInsert(Position<Entry<K, V>> p) throws InvalidPositionException {
         // Implement balancing logic for insertions
     }
 
@@ -541,7 +541,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      *
      * @param p The position where the deletion occurred.
      */
-    protected void rebalanceDelete(Position<Entry<K, V>> p) {
+    protected void rebalanceDelete(Position<Entry<K, V>> p) throws InvalidPositionException {
         // Implement balancing logic for deletions
     }
 

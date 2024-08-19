@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import lists.Position;
 import priorityqueue.Entry;
+import trees.InvalidPositionException;
 
 /**
  * An abstract base class to assist in creating sorted map implementations.
@@ -61,21 +62,21 @@ public abstract class AbstractSortedMap<K, V> extends AbstractMap<K,V> {
     /**
      * Placeholder for rebalancing after access. Should be implemented in subclasses (e.g., for splay trees).
      */
-    protected void rebalanceAccess(Position<Entry<K,V>> p) {
+    protected void rebalanceAccess(Position<Entry<K,V>> p) throws InvalidPositionException {
         // No operation in the base class; intended to be overridden by subclasses
     }
     
     /**
      * Placeholder for rebalancing after insertion. Should be implemented in subclasses (e.g., for AVL or Red-Black trees).
      */
-    protected void rebalanceInsert(Position<Entry<K,V>> p) {
+    protected void rebalanceInsert(Position<Entry<K,V>> p) throws InvalidPositionException {
         // No operation in the base class; intended to be overridden by subclasses
     }
     
     /**
      * Placeholder for rebalancing after deletion. Should be implemented in subclasses if needed.
      */
-    protected void rebalanceDelete(Position<Entry<K,V>> p) {
+    protected void rebalanceDelete(Position<Entry<K,V>> p) throws InvalidPositionException {
         // No operation in the base class; intended to be overridden by subclasses
     }
 
