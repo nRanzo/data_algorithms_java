@@ -6,53 +6,110 @@ import lists.Position;
 import priorityqueue.Entry;
 import trees.InvalidPositionException;
 
+/**
+ * AVLTreeMap is an implementation of a map using an AVL tree, a self-balancing
+ * binary search tree. In an AVL tree, the heights of the two child subtrees of 
+ * any node differ by at most one. If at any time they differ by more than one, 
+ * rebalancing is performed to restore this property.
+ * 
+ * <p>An AVL tree ensures that the tree remains balanced after each insertion and 
+ * deletion. The height balance property means that for every internal position p,
+ * the heights of the left and right subtrees differ by at most one. This guarantees
+ * that the height of the tree remains logarithmic in the number of nodes, ensuring
+ * efficient search, insertion, and deletion operations.</p>
+ *
+ * <p>This implementation extends the {@link TreeMap} class and provides additional
+ * methods for maintaining balance during updates (insertions and deletions).</p>
+ *
+ * @param <K> the type of keys maintained by this map
+ * @param <V> the type of mapped values
+ */
 public class AVLTreeMap<K,V> extends TreeMap<K,V> {
     
-    // constructs an empty map using natural ordering between keys
+    /**
+     * Constructs an empty map using the natural ordering of keys.
+     */
     public AVLTreeMap() {
         super();
     }
 
-    // constructs an empty map by sorting the keys with the given comparator
+    /**
+     * Constructs an empty map using the given comparator to order keys.
+     *
+     * @param comp the comparator that will be used to order the keys
+     */
     public AVLTreeMap(Comparator<K> comp) {
         super(comp);
     }
 
+    /**
+     * Returns the height of the subtree rooted at the given position.
+     *
+     * @param p the position in the tree
+     * @return the height of the subtree rooted at p
+     */
     protected int height(Position<Entry<K,V>> p) {
         return tree.getAux(p);
     }
 
-    // recalculates the height of the given position based on the heights of its children
+    /**
+     * Recalculates and sets the height of the given position based on the
+     * heights of its children.
+     *
+     * @param p the position whose height needs to be recalculated
+     * @throws InvalidPositionException if the position is invalid
+     */
     protected void recomputeHeight(Position<Entry<K,V>> p) throws InvalidPositionException {
         tree.setAux(p, 1 + Math.max(height(left(p)), height(right(p))));
     }
 
-    // returns true if and only if p has a balance factor of 1, 0, or -1
+    /**
+     * Checks if the node at the given position is balanced. A node is balanced if
+     * the heights of its left and right children differ by at most one.
+     *
+     * @param p the position to check for balance
+     * @return true if the node is balanced, false otherwise
+     * @throws InvalidPositionException if the position is invalid
+     */
     protected boolean isBalanced(Position<Entry<K,V>> p) throws InvalidPositionException {
         return Math.abs(height(left(p)) - height(right(p))) <= 1;
     }
 
-    // returns the child of p whose height is no less than that of the other child
+    /**
+     * Returns the child of the given position that has a height no less than
+     * that of the other child. If the children have equal heights, the method
+     * returns the left child by default.
+     *
+     * @param p the position whose taller child is to be returned
+     * @return the child of p with the greater height
+     * @throws InvalidPositionException if the position is invalid
+     */
     protected Position<Entry<K,V>> tallerChild(Position<Entry<K,V>> p) throws InvalidPositionException {
-        if(height(left(p)) > height(right(p)))
+        if (height(left(p)) > height(right(p)))
             return left(p);
-        if(height(left(p)) < height(right(p)))
+        if (height(left(p)) < height(right(p)))
             return right(p);
-        if(isRoot(p))
-            return left(p);     // or right(p), it makes no difference
+        if (isRoot(p))
+            return left(p);  // Either child can be returned since they are equal
         if (p == left(parent(p)))
             return left(p);
         else
             return right(p);
     }
 
-    // auxiliary method used to restore balance after an insertion or removal operation. It goes up the path 
-    // from p, performing a backhoe restructuring when it finds an imbalance, continuing to the end.
+    /**
+     * Restores the balance of the tree after an insertion or deletion operation.
+     * It traverses the path from the given position to the root, performing 
+     * necessary rotations to correct imbalances.
+     *
+     * @param p the position to start rebalancing from
+     * @throws InvalidPositionException if the position is invalid
+     */
     protected void rebalance(Position<Entry<K,V>> p) throws InvalidPositionException {
         int oldHeight, newHeight;
         do {
             oldHeight = height(p);
-            if(!isBalanced(p)) {
+            if (!isBalanced(p)) {
                 p = restructure(tallerChild(tallerChild(p)));
                 recomputeHeight(left(p));
                 recomputeHeight(right(p));
@@ -63,12 +120,22 @@ public class AVLTreeMap<K,V> extends TreeMap<K,V> {
         } while (oldHeight != newHeight && p != null);
     }
 
-    // overrides the TreeMap method that is invoked after an insertion
+    /**
+     * Rebalances the tree after an insertion operation.
+     *
+     * @param p the position where insertion occurred
+     * @throws InvalidPositionException if the position is invalid
+     */
     protected void rebalanceInsert(Position<Entry<K,V>> p) throws InvalidPositionException {
         rebalance(p);
     }
 
-    // overrides the TreeMap method that is invoked after a removal
+    /**
+     * Rebalances the tree after a deletion operation.
+     *
+     * @param p the position where deletion occurred
+     * @throws InvalidPositionException if the position is invalid
+     */
     protected void rebalanceDelete(Position<Entry<K,V>> p) throws InvalidPositionException {
         rebalance(parent(p));
     }
@@ -77,9 +144,9 @@ public class AVLTreeMap<K,V> extends TreeMap<K,V> {
      * Performs a tree rotation to restore balance at a given unbalanced node.
      * The method determines the appropriate rotation (single or double) based on
      * the structure of the tree at the node and its children.
-     * 
-     * @param x The child of the child of the node that is unbalanced (the "grandchild").
-     * @return The new root of the subtree after restructuring.
+     *
+     * @param x the child of the child of the node that is unbalanced (the "grandchild").
+     * @return the new root of the subtree after restructuring.
      * @throws InvalidPositionException if any positions involved are invalid.
      */
     protected Position<Entry<K, V>> restructure(Position<Entry<K, V>> x) throws InvalidPositionException {
@@ -98,8 +165,8 @@ public class AVLTreeMap<K,V> extends TreeMap<K,V> {
 
     /**
      * Performs a single rotation (left or right) depending on the child configuration.
-     * 
-     * @param p The node around which to perform the rotation.
+     *
+     * @param p the node around which to perform the rotation.
      * @throws InvalidPositionException if any positions involved are invalid.
      */
     private void rotate(Position<Entry<K, V>> p) throws InvalidPositionException {
