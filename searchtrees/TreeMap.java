@@ -348,7 +348,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      * <p>
      * This method locates and returns the entry with the largest key in the map.
      * If the map is empty, it returns null. The maximum key is found by traversing
-     * the rightmost path in the binary search tree.
+     * the rightmost path in the binary search tree. Time complexity O(log n).
      * </p>
      *
      * @return The entry with the maximum key, or null if the map is empty.
@@ -366,7 +366,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      * This method searches the tree for the specified key. If the key is found, 
      * it returns the corresponding entry. If the key is not found, the method 
      * traverses upwards in the tree to find the largest key that is less than the specified key.
-     * If no such key exists, it returns null.
+     * If no such key exists, it returns null. Time complexity O(log n).
      * </p>
      *
      * @param key The key to compare against.
@@ -401,7 +401,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      * This method searches the tree for the specified key. If the key is found, it checks 
      * the left subtree for the largest key that is less than the specified key. 
      * If the key is not found, the method traverses upwards in the tree to find the 
-     * largest key that is strictly less than the specified key. If no such key exists, it returns null.
+     * largest key that is strictly less than the specified key. If no such key exists, it returns 
+     * null. Time complexity O(log n).
      * </p>
      *
      * @param key The key to compare against.
@@ -438,7 +439,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      * <p>
      * This method performs an in-order traversal of the binary search tree to collect
      * all internal nodes, which represent the valid key-value pairs in the map. The resulting
-     * entries are returned in a sorted order according to their keys.
+     * entries are returned in a sorted order according to their keys. Time complexity O(n).
      * </p>
      *
      * @return An iterable collection of all entries in the map, ordered by the keys.
@@ -466,7 +467,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      * <p>
      * This method gathers all entries whose keys fall within the specified range (inclusive of fromKey
      * and exclusive of toKey). The entries are retrieved using an in-order traversal, ensuring they
-     * are returned in sorted order.
+     * are returned in sorted order. Time complexity O(s + log n), where s is the number of entries returned
+     * by subMap.
      * </p>
      *
      * @param fromKey The lower bound (inclusive) of the keys to include.
