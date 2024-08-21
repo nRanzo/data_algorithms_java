@@ -6,6 +6,7 @@ Search trees are a class of data structures designed to store elements (typicall
 
 Before diving into AVL trees and TreeMap, it’s essential to understand the concept of a binary search tree (BST). A BST is a binary tree where:
     The left child of a node contains only values less than the node's value.
+
     The right child of a node contains only values greater than the node's value.
 
 This property ensures that searching for an element can be done efficiently in O(log n) time on average, assuming the tree is balanced.
@@ -21,12 +22,14 @@ An AVL tree is a self-balancing binary search tree named after its inventors, Ad
 ### Height Balance Property
 
     For any internal node v, the height difference between the left and right subtrees (also called the balance factor) is at most 1.
+
     This property ensures that the tree remains approximately balanced at all times, maintaining the logarithmic time complexity for search, insertion, and deletion operations.
 
 ### Rotations in AVL Trees
 
 When an imbalance is detected after an insertion or deletion, it is corrected using tree rotations:
     Single rotation: A rotation where a node is moved up, and its child is moved down.
+
     Double rotation: A combination of two single rotations, used when the tree needs more complex rebalancing.
 
 The rebalancing process, including rotations, takes O(log n) time, maintaining the overall efficiency of the tree.
@@ -38,7 +41,9 @@ TreeMap is a Java collection framework implementation that uses a balanced searc
 ### Key Features of TreeMap
 
     Sorted Order: TreeMap maintains its elements in sorted order based on their keys. This is unlike a hash-based map where the order of elements is not defined.
+
     Efficient Operations: Because it uses a balanced tree internally, operations such as insertion, deletion, and lookup all have O(log n) time complexity.
+    
     Custom Ordering: TreeMap allows custom ordering of keys via comparators, enabling flexible and powerful data storage.
 
 ### Comparison of AVL Trees and TreeMap

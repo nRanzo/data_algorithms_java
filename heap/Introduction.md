@@ -2,6 +2,7 @@
 
 A heap is a specialized tree-based data structure that satisfies the heap property:
     In a min-heap, for any given node, its value is less than or equal to the values of its children.
+
     In a max-heap, for any given node, its value is greater than or equal to the values of its children.
 
 Heaps are typically implemented as binary trees, allowing efficient support for priority queue operations like insertion and removal of the minimum (or maximum) element. The heap’s primary advantage lies in its ability to maintain a balanced structure where the height is logarithmic relative to the number of elements, ensuring operations can be performed efficiently.
@@ -13,6 +14,7 @@ A heap is structured as a complete binary tree, meaning all levels of the tree a
 ### Criteria for Arranging Elements
 
     Min-heap: Each parent node’s value is less than or equal to its children's values, ensuring the minimum element is always at the root.
+
     Max-heap: Each parent node’s value is greater than or equal to its children's values, ensuring the maximum element is always at the root.
 
 To maintain this property, the heap uses the following mechanisms during insertion and removal:
@@ -21,10 +23,12 @@ To maintain this property, the heap uses the following mechanisms during inserti
 
 Insertion (insert) - O(log n):
     When inserting an element, it is initially placed at the bottom of the heap to maintain the complete binary tree structure.
+
     The element then "bubbles up" by swapping with its parent until the heap property is restored. This process is known as up-heap (or bubble up) and involves traversing up the tree, taking O(log n) time because the height of the heap is proportional to log n.
 
 Removal of the Minimum/Maximum (removeMin/removeMax) - O(log n):
     The minimum (or maximum) element is always at the root. When removing it, the last element in the heap replaces the root.
+
     The heap then "bubbles down" this element by swapping it with its smaller (or larger, in a max-heap) child until the heap property is restored. This process is known as down-heap (or bubble down) and similarly takes O(log n) time.
 
 ### Efficiency Compared to Sorted and Unsorted Priority Queues
