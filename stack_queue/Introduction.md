@@ -98,10 +98,13 @@ Implementations:
         Disadvantage:
             Increased complexity in implementation.
         Use Cases: Used in specialized scenarios like round-robin scheduling, real-time systems, or network buffers.
-        Use Cases for Queues:
-            Task Scheduling: Queues are ideal for managing tasks in a multi-threaded environment or for handling asynchronous events (e.g., job scheduling in operating systems, task queues in web servers).
-            Breadth-First Search (BFS): In graph traversal algorithms, queues are used to explore nodes level by level.
-            Buffering: Queues serve as buffers in data streaming, where data is consumed at different rates by producers and consumers.
+
+Use Cases for Queues:
+    Task Scheduling: Queues are ideal for managing tasks in a multi-threaded environment or for handling asynchronous events (e.g., job scheduling in operating systems, task queues in web servers).
+    
+    Breadth-First Search (BFS): In graph traversal algorithms, queues are used to explore nodes level by level.
+    
+    Buffering: Queues serve as buffers in data streaming, where data is consumed at different rates by producers and consumers.
 
 ### Advantages and Disadvantages of Stacks and Queues
 
@@ -109,6 +112,7 @@ Stacks:
     Advantages:
         Simple and efficient for LIFO operations.
         Useful in managing nested operations like function calls and recursive algorithms.
+
     Disadvantage:
         Limited to LIFO operations, not suitable for scenarios requiring FIFO processing.
 
@@ -116,7 +120,8 @@ Queues:
     Advantages:
         Ideal for managing sequential processes in FIFO order.
         Supports real-time processing and task scheduling.
-    Disadvantages:
+
+    Disadvantage:
         Limited to FIFO operations, less flexible for scenarios requiring LIFO or random access.
 
 ### Conclusion
