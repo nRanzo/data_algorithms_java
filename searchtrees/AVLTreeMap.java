@@ -7,6 +7,9 @@ import priorityqueue.Entry;
 import trees.InvalidPositionException;
 
 /**
+ * PLEASE NOTE that an AVL (or similar) is used only when the application requires an 
+ * ordered map with very dynamic content, with frequent insertion and / or removal operations
+ * 
  * AVLTreeMap is an implementation of a map using an AVL tree, a self-balancing
  * binary search tree. In an AVL tree, the heights of the two child subtrees of 
  * any node differ by at most one. If at any time they differ by more than one, 
