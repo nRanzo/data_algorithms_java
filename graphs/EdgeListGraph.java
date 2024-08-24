@@ -48,7 +48,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Returns the number of vertices in the graph.
+     * Returns the number of vertices in the graph. Time complexity O(1).
      *
      * @return the number of vertices
      */
@@ -58,7 +58,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Returns an iterable collection of all the vertices in the graph.
+     * Returns an iterable collection of all the vertices in the graph. Time complexity O(n).
      *
      * @return an iterable collection of vertices
      */
@@ -72,7 +72,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Returns the number of edges in the graph.
+     * Returns the number of edges in the graph. Time complexity O(1).
      *
      * @return the number of edges
      */
@@ -82,7 +82,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Returns an iterable collection of all the edges in the graph.
+     * Returns an iterable collection of all the edges in the graph. Time complexity O(m).
      *
      * @return an iterable collection of edges
      */
@@ -97,6 +97,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
 
     /**
      * Returns the edge from vertex {@code u} to vertex {@code v}, or {@code null} if no such edge exists.
+     * Time complexity O(m).
      *
      * @param u the first vertex
      * @param v the second vertex
@@ -150,7 +151,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Returns the number of outgoing edges from vertex {@code v}.
+     * Returns the number of outgoing edges from vertex {@code v}. Time complexity O(m).
      *
      * @param v the vertex whose outgoing edges are to be counted
      * @return the number of outgoing edges from {@code v}
@@ -167,7 +168,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Returns the number of incoming edges to vertex {@code v}.
+     * Returns the number of incoming edges to vertex {@code v}. Time complexity O(m).
      * In an undirected graph, this method returns the same value as {@code outDegree(v)}.
      *
      * @param v the vertex whose incoming edges are to be counted
@@ -185,7 +186,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Returns an iterable collection of all outgoing edges from vertex {@code v}.
+     * Returns an iterable collection of all outgoing edges from vertex {@code v}. Time complexity O(m).
      *
      * @param v the vertex whose outgoing edges are to be returned
      * @return an iterable collection of outgoing edges from {@code v}
@@ -204,6 +205,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     /**
      * Returns an iterable collection that allows traversal of all incoming edges to vertex {@code v}.
      * In an undirected graph, this method returns the same collection as {@code outgoingEdges(v)}.
+     * Time complexity O(m).
      *
      * @param v the vertex whose incoming edges are to be returned
      * @return an iterable collection of incoming edges to {@code v}
@@ -220,7 +222,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Creates and returns a new vertex object that stores the element {@code x}.
+     * Creates and returns a new vertex object that stores the element {@code x}. Time complexity O(1).
      *
      * @param x the element to be stored in the new vertex
      * @return the newly created vertex
@@ -234,7 +236,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
 
     /**
      * Creates and returns a new edge object that stores the element {@code x} and represents an edge
-     * from vertex {@code u} to vertex {@code v}.
+     * from vertex {@code u} to vertex {@code v}. Time complexity O(1).
      *
      * @param u the origin vertex
      * @param v the destination vertex
@@ -258,7 +260,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Removes vertex {@code v} from the graph, along with all edges incident to it.
+     * Removes vertex {@code v} from the graph, along with all edges incident to it. Time complexity O(m).
      *
      * @param v the vertex to be removed
      * @throws InvalidVertexException if {@code v} is an invalid vertex
@@ -275,7 +277,7 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Removes edge {@code e} from the graph.
+     * Removes edge {@code e} from the graph. Time complexity O(1).
      *
      * @param e the edge to be removed
      * @throws InvalidEdgeException if {@code e} is an invalid edge
@@ -287,8 +289,9 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Validates if the given vertex is valid in the graph.
-     *
+     * Validates if the given vertex is valid in the graph. Time complexity O(V), where V is the number of vertices.
+     * In the worst case, it may need to check every vertex in the list.
+     * 
      * @param v the vertex to be validated
      * @return the Vertex object corresponding to the given vertex element
      * @throws InvalidVertexException if the vertex is not found
@@ -303,7 +306,8 @@ public class EdgeListGraph<V, E> implements Graph<V, E> {
     }
 
     /**
-     * Validates if the given edge is valid in the graph.
+     * Validates if the given edge is valid in the graph. Time complexity O(E), where E is the number of edges.
+     * In the worst case, it may need to check every edge in the list.
      *
      * @param e the edge to be validated
      * @return the Edge object corresponding to the given edge element
