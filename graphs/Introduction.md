@@ -167,4 +167,6 @@ Key Differences:
 
         Spanning Tree: Must be connected.
 
+Additionally, it’s worth noting that a graph without cycles (regardless of whether it is connected or not) is called a forest, and its connected components are trees. Interestingly, a tree is also a type of forest, and a connected forest is, by definition, a tree.
+
 In summary, while both concepts involve subgraphs that include all the vertices of the original graph, a spanning tree is a more specific type of spanning subgraph with strict properties of connectivity and acyclicity, making it a vital tool in various applications that require efficient and minimal connectivity.
